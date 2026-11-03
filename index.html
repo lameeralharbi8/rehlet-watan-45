@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
 
 <title>رحلة وطن | الإبتدائية الخامسة والأربعون</title>
 
 <style>
+
+/* =========================
+   إعدادات عامة
+========================= */
 
 *{
     margin:0;
@@ -16,89 +23,102 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
     width:100%;
-    height:100%;
+    min-height:100%;
+    font-family:Tahoma, Arial, sans-serif;
     background:#00513e;
-    font-family:Tahoma,Arial,sans-serif;
+}
+
+body{
+    overflow-x:hidden;
 }
 
 
-/* =====================
-   الصفحة الرئيسية
-===================== */
+/* =========================
+   الواجهة الرئيسية
+========================= */
 
 #home{
-    width:100vw;
-    height:100svh;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    width:100%;
+
+    min-height:100vh;
+    min-height:100svh;
 
     background:#00513e;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:flex-start;
 
     overflow:hidden;
 }
 
 
-/*
-   هذا العنصر يأخذ نفس أبعاد الصورة
-   ويحافظ على نسبة 1488 × 1024
-*/
+/* =========================
+   حاوية الصورة
+
+   عرضها = عرض الشاشة كامل
+========================= */
 
 .cover{
 
     position:relative;
 
-    width:min(
-        100vw,
-        calc(100svh * 1.453125)
-    );
+    width:100vw;
 
     aspect-ratio:1488 / 1024;
 
+    margin:0;
+
+    overflow:hidden;
 }
 
 
-/* الصورة الأصلية */
+/* =========================
+   الصورة الأصلية
+========================= */
 
 .cover img{
 
     position:absolute;
 
-    inset:0;
+    top:0;
+    left:0;
 
     width:100%;
     height:100%;
 
-    object-fit:contain;
+    object-fit:fill;
 
     display:block;
 
+    margin:0;
+    padding:0;
 }
 
 
-/* =================================
-   منطقة الضغط الشفافة
+/* =========================
+   زر شفاف
 
-   فوق زر "ابدئي الرحلة"
-   الموجود أصلًا داخل الصورة
-================================= */
+   موجود فوق زر
+   "ابدئي الرحلة"
+   الموجود داخل الصورة
+========================= */
 
 .start-button{
 
     position:absolute;
 
-    /*
-       محسوبة من الصورة نفسها
-       عشان تكون فوق الزر الأخضر
-    */
-
     left:36.3%;
+
     top:48.8%;
 
     width:27.4%;
+
     height:9.5%;
 
     border:0;
@@ -109,54 +129,67 @@ html,body{
 
     cursor:pointer;
 
-    z-index:10;
+    z-index:20;
 
     -webkit-tap-highlight-color:transparent;
-
 }
 
-
-/* لا يظهر شيء عند الضغط */
 
 .start-button:active{
+
     background:transparent;
+
 }
 
 
-/* =====================
-   صفحة الرحلة
-===================== */
+/* =========================
+   صفحة مسار الرحلة
+========================= */
 
 #journey{
 
     display:none;
 
+    width:100%;
+
+    min-height:100vh;
     min-height:100svh;
 
-    padding:35px 25px 60px;
+    padding:
+      max(30px, env(safe-area-inset-top))
+      30px
+      60px;
 
     background:
-    linear-gradient(
-        160deg,
-        #fffdf5,
-        #e8f1eb
-    );
+
+      radial-gradient(
+        circle at top,
+        #fffdf6 0%,
+        #edf4ef 45%,
+        #d8e9df 100%
+      );
 
     color:#075b45;
-
 }
 
 
-.container{
+/* الحاوية */
 
-    max-width:1100px;
+.journey-container{
+
+    width:100%;
+
+    max-width:1150px;
 
     margin:auto;
-
 }
 
 
-.back{
+/* =========================
+   زر الرجوع
+========================= */
+
+.back-button{
 
     border:0;
 
@@ -168,27 +201,59 @@ html,body{
 
     font-weight:bold;
 
-    cursor:pointer;
+    padding:10px;
 
+    cursor:pointer;
 }
 
 
-.title{
+/* =========================
+   العنوان
+========================= */
+
+.journey-title{
 
     text-align:center;
 
-    font-size:clamp(
-        40px,
+    color:#075b45;
+
+    font-size:
+      clamp(
+        42px,
         6vw,
         68px
-    );
+      );
 
-    margin-top:20px;
-
+    margin-top:15px;
 }
 
 
-.subtitle{
+.gold-line{
+
+    width:140px;
+
+    height:4px;
+
+    margin:12px auto 18px;
+
+    border-radius:20px;
+
+    background:
+
+      linear-gradient(
+        90deg,
+        transparent,
+        #d7ad55,
+        transparent
+      );
+}
+
+
+.journey-subtitle{
+
+    max-width:700px;
+
+    margin:auto;
 
     text-align:center;
 
@@ -196,357 +261,611 @@ html,body{
 
     font-size:18px;
 
-    line-height:1.8;
-
-    margin:10px auto 40px;
-
+    line-height:1.9;
 }
 
 
-/* المحطات */
+/* =========================
+   شريط التقدم
+========================= */
+
+.progress-area{
+
+    width:85%;
+
+    max-width:700px;
+
+    margin:
+      30px auto
+      45px;
+
+    text-align:center;
+}
+
+
+.progress-text{
+
+    margin-bottom:10px;
+
+    color:#98752e;
+
+    font-size:15px;
+
+    font-weight:bold;
+}
+
+
+.progress{
+
+    width:100%;
+
+    height:12px;
+
+    border-radius:30px;
+
+    background:#dce7df;
+
+    overflow:hidden;
+}
+
+
+.progress-bar{
+
+    width:5%;
+
+    height:100%;
+
+    border-radius:30px;
+
+    background:
+
+      linear-gradient(
+        90deg,
+        #d7ad55,
+        #075b45
+      );
+}
+
+
+/* =========================
+   المحطات
+========================= */
 
 .stations{
 
     display:grid;
 
     grid-template-columns:
-    repeat(4,1fr);
+      repeat(4, 1fr);
 
-    gap:18px;
-
+    gap:20px;
 }
 
+
+/* البطاقة */
 
 .station{
 
     position:relative;
 
-    min-height:240px;
+    min-height:250px;
 
-    padding:25px 15px;
+    padding:25px 18px;
 
     border-radius:28px;
 
-    background:white;
+    border:
+      2px solid
+      #dce7df;
 
-    border:2px solid #dce7df;
+    background:
+      rgba(255,255,255,.92);
 
     box-shadow:
-    0 12px 30px
-    rgba(0,60,40,.10);
+      0 15px 35px
+      rgba(10,70,48,.10);
 
     display:flex;
 
     flex-direction:column;
 
-    align-items:center;
-
     justify-content:center;
 
-    text-align:center;
+    align-items:center;
 
+    text-align:center;
 }
 
+
+/* المحطة الأولى */
 
 .station.active{
 
     border:
-    3px solid #d5ad52;
+      3px solid
+      #d7ad55;
 
     background:
-    linear-gradient(
-        145deg,
-        white,
-        #fff8e6
-    );
 
+      linear-gradient(
+        145deg,
+        #ffffff,
+        #fff8e7
+      );
+
+    transform:
+      translateY(-7px);
+
+    box-shadow:
+      0 18px 40px
+      rgba(130,95,25,.18);
 }
 
+
+/* المحطات المقفلة */
 
 .station.locked{
 
-    opacity:.55;
-
+    opacity:.58;
 }
 
 
-.number{
+/* رقم المحطة */
 
-    width:46px;
-    height:46px;
+.station-number{
+
+    width:48px;
+
+    height:48px;
 
     border-radius:50%;
 
     background:#075b45;
 
-    color:white;
+    color:#fff;
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
+
+    align-items:center;
 
     font-weight:bold;
 
+    font-size:17px;
+
+    margin-bottom:13px;
+}
+
+
+/* الأيقونة */
+
+.station-icon{
+
+    font-size:42px;
+
     margin-bottom:12px;
-
 }
 
 
-.icon{
-
-    font-size:40px;
-
-    margin-bottom:10px;
-
-}
-
+/* عنوان البطاقة */
 
 .station h3{
 
     color:#075b45;
 
-    margin-bottom:8px;
+    font-size:21px;
 
-    font-size:20px;
-
+    margin-bottom:9px;
 }
 
+
+/* الوصف */
 
 .station p{
 
     color:#687a73;
 
-    line-height:1.7;
+    font-size:15px;
 
+    line-height:1.7;
 }
 
+
+/* القفل */
 
 .lock{
 
     position:absolute;
 
     top:15px;
+
     left:15px;
 
+    font-size:20px;
 }
 
 
-/* الآيباد الأصغر */
+/* =========================
+   زر بدء المحطة
+========================= */
 
-@media(max-width:900px){
+.enter-area{
+
+    margin-top:45px;
+
+    text-align:center;
+}
+
+
+.enter-button{
+
+    border:0;
+
+    border-radius:50px;
+
+    padding:
+      16px
+      40px;
+
+    background:
+
+      linear-gradient(
+        135deg,
+        #075b45,
+        #098160
+      );
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+      0 12px 28px
+      rgba(7,91,69,.25);
+}
+
+
+.enter-button:active{
+
+    transform:scale(.97);
+}
+
+
+/* =========================
+   الآيباد الأصغر
+========================= */
+
+@media(max-width:950px){
 
     .stations{
 
         grid-template-columns:
-        repeat(2,1fr);
+          repeat(2,1fr);
 
     }
 
 }
 
 
-/* الجوال */
+/* =========================
+   الجوال
+========================= */
 
-@media(max-width:550px){
+@media(max-width:600px){
+
+    #journey{
+
+        padding:
+          25px
+          16px
+          45px;
+
+    }
+
 
     .stations{
 
-        grid-template-columns:1fr;
+        grid-template-columns:
+          1fr;
+
+    }
+
+
+    .station{
+
+        min-height:220px;
 
     }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- =====================
-     الصورة الرئيسية
-===================== -->
+<!-- ==================================
+     الواجهة الرئيسية
+================================== -->
 
 <section id="home">
 
+
     <div class="cover">
 
+
+        <!-- الصورة فقط -->
+
         <img
-        src="watan-cover.jpg"
-        alt="رحلة وطن">
+          src="watan-cover.jpg"
+          alt="رحلة وطن"
+        >
 
 
         <!--
-        هذا شفاف تمامًا
-        وموجود فوق الزر الأخضر
-        الموجود داخل الصورة
+          منطقة شفافة فقط
+          فوق زر ابدئي الرحلة
+          الموجود أصلًا داخل الصورة
         -->
 
         <button
-        class="start-button"
-        onclick="startJourney()"
-        aria-label="ابدئي الرحلة">
+          class="start-button"
+          onclick="startJourney()"
+          aria-label="ابدئي الرحلة">
         </button>
 
+
     </div>
+
 
 </section>
 
 
 
-<!-- =====================
-     صفحة المحطات
-===================== -->
+<!-- ==================================
+     صفحة مسار الرحلة
+================================== -->
 
 <section id="journey">
 
-<div class="container">
+
+<div class="journey-container">
 
 
-<button
-class="back"
-onclick="goHome()">
+    <!-- رجوع -->
 
-→ العودة للرئيسية
+    <button
+      class="back-button"
+      onclick="goHome()">
 
-</button>
+      → العودة للرئيسية
 
-
-<h1 class="title">
-
-رحلة وطن 🇸🇦
-
-</h1>
-
-
-<p class="subtitle">
-
-أكملي المحطات الأربع
-واكتشفي رؤيتنا ووطننا
-ومسؤوليتنا تجاهه
-
-</p>
+    </button>
 
 
 
-<div class="stations">
+    <!-- العنوان -->
+
+    <h1 class="journey-title">
+
+      رحلة وطن 🇸🇦
+
+    </h1>
 
 
-<!-- 01 -->
+    <div class="gold-line"></div>
 
-<div class="station active">
 
-<div class="number">
-01
-</div>
+    <p class="journey-subtitle">
 
-<div class="icon">
-💡
-</div>
+      أمامك أربع محطات تفاعلية،
+      أكملي الرحلة واكتشفي
+      رؤيتنا ووطننا ومسؤوليتنا تجاهه.
 
-<h3>
-تعريف برؤية 2030
-</h3>
-
-<p>
-اكتشفي رؤية المملكة
-وطموحات وطننا.
-</p>
-
-</div>
+    </p>
 
 
 
-<!-- 02 -->
+    <!-- التقدم -->
 
-<div class="station locked">
+    <div class="progress-area">
 
-<span class="lock">
-🔒
-</span>
 
-<div class="number">
-02
-</div>
+        <div class="progress-text">
 
-<div class="icon">
-🌱
-</div>
+          تقدم الرحلة ٠٪
 
-<h3>
-أكون مواطنة مسؤولة
-</h3>
+        </div>
 
-<p>
-مواقف تفاعلية
-لاكتشاف معنى المسؤولية.
-</p>
 
-</div>
+        <div class="progress">
+
+            <div class="progress-bar"></div>
+
+        </div>
+
+
+    </div>
 
 
 
-<!-- 03 -->
+    <!-- المحطات -->
 
-<div class="station locked">
-
-<span class="lock">
-🔒
-</span>
-
-<div class="number">
-03
-</div>
-
-<div class="icon">
-🏛️
-</div>
-
-<h3>
-رحلة افتراضية في بلادي
-</h3>
-
-<p>
-جولة بين مناطق
-ومعالم المملكة.
-</p>
-
-</div>
+    <div class="stations">
 
 
+        <!-- المحطة الأولى -->
 
-<!-- 04 -->
-
-<div class="station locked">
-
-<span class="lock">
-🔒
-</span>
-
-<div class="number">
-04
-</div>
-
-<div class="icon">
-🌍
-</div>
-
-<h3>
-المملكة وجهة العالم
-</h3>
-
-<p>
-اكتشفي مكانة المملكة
-وحضورها العالمي.
-</p>
-
-</div>
+        <div class="station active">
 
 
-</div>
+            <div class="station-number">
+              01
+            </div>
+
+
+            <div class="station-icon">
+              💡
+            </div>
+
+
+            <h3>
+              تعريف برؤية 2030
+            </h3>
+
+
+            <p>
+
+              اكتشفي رؤية المملكة
+              وطموحات وطننا
+              نحو المستقبل.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- المحطة الثانية -->
+
+        <div class="station locked">
+
+
+            <span class="lock">
+              🔒
+            </span>
+
+
+            <div class="station-number">
+              02
+            </div>
+
+
+            <div class="station-icon">
+              🌱
+            </div>
+
+
+            <h3>
+              أكون مواطنة مسؤولة
+            </h3>
+
+
+            <p>
+
+              مواقف تفاعلية
+              تساعدك على اكتشاف
+              معنى المسؤولية.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- المحطة الثالثة -->
+
+        <div class="station locked">
+
+
+            <span class="lock">
+              🔒
+            </span>
+
+
+            <div class="station-number">
+              03
+            </div>
+
+
+            <div class="station-icon">
+              🏛️
+            </div>
+
+
+            <h3>
+              رحلة افتراضية في بلادي
+            </h3>
+
+
+            <p>
+
+              جولة بين مناطق
+              ومعالم المملكة
+              وثقافتها.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- المحطة الرابعة -->
+
+        <div class="station locked">
+
+
+            <span class="lock">
+              🔒
+            </span>
+
+
+            <div class="station-number">
+              04
+            </div>
+
+
+            <div class="station-icon">
+              🌍
+            </div>
+
+
+            <h3>
+              المملكة وجهة العالم
+            </h3>
+
+
+            <p>
+
+              اكتشفي مكانة المملكة
+              وحضورها وإنجازاتها
+              أمام العالم.
+
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- زر المحطة -->
+
+    <div class="enter-area">
+
+
+        <button class="enter-button">
+
+          ابدئي المحطة الأولى ←
+
+        </button>
+
+
+    </div>
+
 
 </div>
 
@@ -556,30 +875,60 @@ onclick="goHome()">
 
 <script>
 
+
+/* =========================
+   بدء الرحلة
+========================= */
+
 function startJourney(){
 
-    document.getElementById("home")
-    .style.display="none";
 
-    document.getElementById("journey")
-    .style.display="block";
+    document
+      .getElementById("home")
+      .style
+      .display = "none";
 
-    window.scrollTo(0,0);
+
+    document
+      .getElementById("journey")
+      .style
+      .display = "block";
+
+
+    window.scrollTo(
+      0,
+      0
+    );
 
 }
 
+
+/* =========================
+   الرجوع للرئيسية
+========================= */
 
 function goHome(){
 
-    document.getElementById("journey")
-    .style.display="none";
 
-    document.getElementById("home")
-    .style.display="flex";
+    document
+      .getElementById("journey")
+      .style
+      .display = "none";
 
-    window.scrollTo(0,0);
+
+    document
+      .getElementById("home")
+      .style
+      .display = "flex";
+
+
+    window.scrollTo(
+      0,
+      0
+    );
 
 }
+
 
 </script>
 
