@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
 
@@ -11,10 +10,6 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <style>
 
-/* =========================
-   إعدادات عامة
-========================= */
-
 *{
     margin:0;
     padding:0;
@@ -23,81 +18,90 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 html,body{
     width:100%;
-    min-height:100%;
-    font-family:Tahoma, Arial, sans-serif;
+    height:100%;
     background:#00513e;
-}
-
-body{
-    overflow-x:hidden;
+    font-family:Tahoma,Arial,sans-serif;
 }
 
 
-/* =========================
-   الواجهة الرئيسية
-========================= */
+/* =====================
+   الصفحة الرئيسية
+===================== */
 
 #home{
-    width:100%;
-    height:100vh;
+    width:100vw;
     height:100svh;
 
-    position:relative;
-
     display:flex;
-    align-items:center;
     justify-content:center;
-
-    overflow:hidden;
+    align-items:center;
 
     background:#00513e;
+
+    overflow:hidden;
 }
 
 
-/* الصورة نفسها */
+/*
+   هذا العنصر يأخذ نفس أبعاد الصورة
+   ويحافظ على نسبة 1488 × 1024
+*/
 
 .cover{
+
     position:relative;
+
+    width:min(
+        100vw,
+        calc(100svh * 1.453125)
+    );
+
+    aspect-ratio:1488 / 1024;
+
+}
+
+
+/* الصورة الأصلية */
+
+.cover img{
+
+    position:absolute;
+
+    inset:0;
 
     width:100%;
     height:100%;
 
-    background-image:url("watan-cover.jpg");
+    object-fit:contain;
 
-    background-repeat:no-repeat;
+    display:block;
 
-    /* أهم تعديل:
-       تظهر الصورة كاملة بدون قص */
-    background-size:contain;
-
-    background-position:center;
-
-    background-color:#00513e;
 }
 
 
-/* =========================
-   الزر الشفاف
+/* =================================
+   منطقة الضغط الشفافة
 
    فوق زر "ابدئي الرحلة"
-   الموجود داخل الصورة
-========================= */
+   الموجود أصلًا داخل الصورة
+================================= */
 
-.start-area{
+.start-button{
 
     position:absolute;
 
-    top:53%;
+    /*
+       محسوبة من الصورة نفسها
+       عشان تكون فوق الزر الأخضر
+    */
 
-    left:50%;
+    left:36.3%;
+    top:48.8%;
 
-    transform:translate(-50%,-50%);
+    width:27.4%;
+    height:9.5%;
 
-    width:28%;
-
-    height:10%;
-
-    border:none;
+    border:0;
 
     border-radius:60px;
 
@@ -105,68 +109,56 @@ body{
 
     cursor:pointer;
 
+    z-index:10;
+
     -webkit-tap-highlight-color:transparent;
 
-    z-index:10;
 }
 
 
-.start-area:active{
+/* لا يظهر شيء عند الضغط */
 
-    background:rgba(255,255,255,0.08);
-
+.start-button:active{
+    background:transparent;
 }
 
 
-/* =========================
-   صفحة مسار الرحلة
-========================= */
+/* =====================
+   صفحة الرحلة
+===================== */
 
 #journey{
 
     display:none;
 
-    width:100%;
-
-    min-height:100vh;
     min-height:100svh;
 
-    padding:35px;
+    padding:35px 25px 60px;
 
     background:
-
-    radial-gradient(
-        circle at top,
+    linear-gradient(
+        160deg,
         #fffdf5,
-        #e9f1eb 50%,
-        #d5e6dc
+        #e8f1eb
     );
 
     color:#075b45;
+
 }
 
 
-/* =========================
-   الحاوية
-========================= */
+.container{
 
-.journey-container{
-
-    width:100%;
-
-    max-width:1150px;
+    max-width:1100px;
 
     margin:auto;
+
 }
 
 
-/* =========================
-   زر الرجوع
-========================= */
+.back{
 
-.back-button{
-
-    border:none;
+    border:0;
 
     background:transparent;
 
@@ -178,224 +170,110 @@ body{
 
     cursor:pointer;
 
-    padding:10px;
 }
 
 
-/* =========================
-   عنوان الصفحة
-========================= */
-
-.journey-title{
+.title{
 
     text-align:center;
 
     font-size:clamp(
-        42px,
+        40px,
         6vw,
-        70px
+        68px
     );
 
-    margin-top:15px;
+    margin-top:20px;
 
-    color:#075b45;
 }
 
 
-.gold-line{
-
-    width:130px;
-
-    height:4px;
-
-    margin:12px auto 18px;
-
-    border-radius:10px;
-
-    background:
-
-    linear-gradient(
-        90deg,
-        transparent,
-        #d7ad55,
-        transparent
-    );
-}
-
-
-.journey-subtitle{
-
-    max-width:700px;
-
-    margin:auto;
+.subtitle{
 
     text-align:center;
 
-    color:#667a72;
+    color:#687a73;
 
     font-size:18px;
 
     line-height:1.8;
+
+    margin:10px auto 40px;
+
 }
 
 
-/* =========================
-   التقدم
-========================= */
-
-.progress-section{
-
-    max-width:700px;
-
-    margin:30px auto 45px;
-
-    text-align:center;
-}
-
-
-.progress-text{
-
-    font-size:15px;
-
-    font-weight:bold;
-
-    color:#947027;
-
-    margin-bottom:10px;
-}
-
-
-.progress{
-
-    width:100%;
-
-    height:12px;
-
-    background:#dce7df;
-
-    border-radius:30px;
-
-    overflow:hidden;
-}
-
-
-.progress-bar{
-
-    width:5%;
-
-    height:100%;
-
-    background:
-
-    linear-gradient(
-        90deg,
-        #d7ad55,
-        #075b45
-    );
-
-    border-radius:30px;
-}
-
-
-/* =========================
-   المحطات
-========================= */
+/* المحطات */
 
 .stations{
 
     display:grid;
 
     grid-template-columns:
-        repeat(4,1fr);
+    repeat(4,1fr);
 
-    gap:20px;
+    gap:18px;
+
 }
 
-
-/* بطاقة المحطة */
 
 .station{
 
     position:relative;
 
-    min-height:260px;
+    min-height:240px;
 
-    padding:25px 18px;
+    padding:25px 15px;
 
     border-radius:28px;
 
-    background:
-        rgba(255,255,255,0.9);
+    background:white;
 
-    border:
-        2px solid #dbe7df;
+    border:2px solid #dce7df;
 
     box-shadow:
-        0 15px 35px
-        rgba(12,67,48,0.10);
+    0 12px 30px
+    rgba(0,60,40,.10);
 
     display:flex;
 
     flex-direction:column;
 
-    justify-content:center;
-
     align-items:center;
+
+    justify-content:center;
 
     text-align:center;
 
-    transition:
-        transform .25s,
-        box-shadow .25s;
 }
 
-
-/* المحطة الأولى */
 
 .station.active{
 
     border:
-        3px solid #d7ad55;
+    3px solid #d5ad52;
 
     background:
-
     linear-gradient(
         145deg,
-        #ffffff,
+        white,
         #fff8e6
     );
 
-    transform:
-        translateY(-7px);
-
-    box-shadow:
-
-        0 18px 40px
-        rgba(129,94,27,0.18);
 }
 
-
-/* المحطات المقفلة */
 
 .station.locked{
 
-    opacity:.58;
+    opacity:.55;
+
 }
 
 
-/* الرقم */
+.number{
 
-.station-number{
-
-    width:48px;
-
-    height:48px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
+    width:46px;
+    height:46px;
 
     border-radius:50%;
 
@@ -403,24 +281,25 @@ body{
 
     color:white;
 
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
     font-weight:bold;
 
-    margin-bottom:14px;
+    margin-bottom:12px;
 
-    box-shadow:
-
-        0 5px 12px
-        rgba(7,91,69,.20);
 }
 
 
-/* الأيقونة */
+.icon{
 
-.station-icon{
+    font-size:40px;
 
-    font-size:42px;
+    margin-bottom:10px;
 
-    margin-bottom:12px;
 }
 
 
@@ -428,19 +307,19 @@ body{
 
     color:#075b45;
 
-    font-size:21px;
+    margin-bottom:8px;
 
-    margin-bottom:10px;
+    font-size:20px;
+
 }
 
 
 .station p{
 
-    color:#65786f;
-
-    font-size:15px;
+    color:#687a73;
 
     line-height:1.7;
+
 }
 
 
@@ -448,141 +327,33 @@ body{
 
     position:absolute;
 
-    top:16px;
+    top:15px;
+    left:15px;
 
-    left:16px;
-
-    font-size:20px;
 }
 
 
-/* =========================
-   زر المحطة الأولى
-========================= */
+/* الآيباد الأصغر */
 
-.enter-section{
-
-    text-align:center;
-
-    margin-top:45px;
-}
-
-
-.enter-button{
-
-    border:none;
-
-    padding:16px 40px;
-
-    border-radius:50px;
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #075b45,
-        #09906a
-    );
-
-    box-shadow:
-
-        0 12px 28px
-        rgba(7,91,69,.25);
-
-    transition:.2s;
-}
-
-
-.enter-button:active{
-
-    transform:scale(.96);
-}
-
-
-/* =========================
-   الآيباد
-========================= */
-
-@media(max-width:950px){
+@media(max-width:900px){
 
     .stations{
 
         grid-template-columns:
-            repeat(2,1fr);
+        repeat(2,1fr);
 
     }
 
 }
 
 
-/* =========================
-   الجوال
-========================= */
+/* الجوال */
 
-@media(max-width:600px){
-
-    #journey{
-
-        padding:22px 16px 40px;
-
-    }
-
+@media(max-width:550px){
 
     .stations{
 
         grid-template-columns:1fr;
-
-    }
-
-
-    .station{
-
-        min-height:220px;
-
-    }
-
-}
-
-
-/* =========================
-   الآيباد الأفقي
-========================= */
-
-@media(
-    min-width:700px
-)
-and
-(
-    orientation:landscape
-){
-
-    .cover{
-
-        background-size:contain;
-
-    }
-
-
-    .start-area{
-
-        /*
-        مكان زر ابدئي الرحلة
-        في التصميم الجديد
-        */
-
-        top:53%;
-
-        width:28%;
-
-        height:10%;
 
     }
 
@@ -595,23 +366,29 @@ and
 <body>
 
 
-<!-- =========================
-     الواجهة
-========================= -->
+<!-- =====================
+     الصورة الرئيسية
+===================== -->
 
 <section id="home">
 
     <div class="cover">
 
+        <img
+        src="watan-cover.jpg"
+        alt="رحلة وطن">
+
+
         <!--
-        زر شفاف فوق زر
-        ابدئي الرحلة الموجود بالصورة
+        هذا شفاف تمامًا
+        وموجود فوق الزر الأخضر
+        الموجود داخل الصورة
         -->
 
         <button
-            class="start-area"
-            onclick="startJourney()"
-            aria-label="ابدئي الرحلة">
+        class="start-button"
+        onclick="startJourney()"
+        aria-label="ابدئي الرحلة">
         </button>
 
     </div>
@@ -620,223 +397,156 @@ and
 
 
 
-<!-- =========================
-     مسار الرحلة
-========================= -->
+<!-- =====================
+     صفحة المحطات
+===================== -->
 
 <section id="journey">
 
-<div class="journey-container">
+<div class="container">
 
 
-    <button
-        class="back-button"
-        onclick="goHome()">
+<button
+class="back"
+onclick="goHome()">
 
-        → العودة للرئيسية
+→ العودة للرئيسية
 
-    </button>
+</button>
 
 
-    <h1 class="journey-title">
+<h1 class="title">
 
-        رحلة وطن 🇸🇦
+رحلة وطن 🇸🇦
 
-    </h1>
+</h1>
 
 
-    <div class="gold-line"></div>
+<p class="subtitle">
 
+أكملي المحطات الأربع
+واكتشفي رؤيتنا ووطننا
+ومسؤوليتنا تجاهه
 
-    <p class="journey-subtitle">
+</p>
 
-        أمامك أربع محطات تفاعلية.
 
-        أكملي الرحلة واجمعي شاراتك
 
-        للوصول إلى لقب
+<div class="stations">
 
-        <strong>
-        سفيرة الوعي الوطني
-        </strong>
 
-    </p>
+<!-- 01 -->
 
+<div class="station active">
 
+<div class="number">
+01
+</div>
 
-    <!-- التقدم -->
+<div class="icon">
+💡
+</div>
 
-    <div class="progress-section">
+<h3>
+تعريف برؤية 2030
+</h3>
 
-        <div class="progress-text">
+<p>
+اكتشفي رؤية المملكة
+وطموحات وطننا.
+</p>
 
-            تقدم رحلتك
-            ٠٪
+</div>
 
-        </div>
 
 
-        <div class="progress">
+<!-- 02 -->
 
-            <div class="progress-bar"></div>
+<div class="station locked">
 
-        </div>
+<span class="lock">
+🔒
+</span>
 
-    </div>
+<div class="number">
+02
+</div>
 
+<div class="icon">
+🌱
+</div>
 
+<h3>
+أكون مواطنة مسؤولة
+</h3>
 
-    <!-- المحطات -->
+<p>
+مواقف تفاعلية
+لاكتشاف معنى المسؤولية.
+</p>
 
-    <div class="stations">
+</div>
 
 
-        <!-- 01 -->
 
-        <div class="station active">
+<!-- 03 -->
 
-            <div class="station-number">
-                01
-            </div>
+<div class="station locked">
 
-            <div class="station-icon">
-                💡
-            </div>
+<span class="lock">
+🔒
+</span>
 
-            <h3>
-                تعريف برؤية 2030
-            </h3>
+<div class="number">
+03
+</div>
 
-            <p>
+<div class="icon">
+🏛️
+</div>
 
-                اكتشفي رؤية المملكة
+<h3>
+رحلة افتراضية في بلادي
+</h3>
 
-                وطموحات وطننا
+<p>
+جولة بين مناطق
+ومعالم المملكة.
+</p>
 
-                نحو المستقبل.
+</div>
 
-            </p>
 
-        </div>
 
+<!-- 04 -->
 
+<div class="station locked">
 
-        <!-- 02 -->
+<span class="lock">
+🔒
+</span>
 
-        <div class="station locked">
+<div class="number">
+04
+</div>
 
-            <span class="lock">
-                🔒
-            </span>
+<div class="icon">
+🌍
+</div>
 
-            <div class="station-number">
-                02
-            </div>
+<h3>
+المملكة وجهة العالم
+</h3>
 
-            <div class="station-icon">
-                🌱
-            </div>
+<p>
+اكتشفي مكانة المملكة
+وحضورها العالمي.
+</p>
 
-            <h3>
-                أكون مواطنة مسؤولة
-            </h3>
+</div>
 
-            <p>
 
-                مواقف واختيارات
-
-                تساعدك على اكتشاف
-
-                معنى المواطنة المسؤولة.
-
-            </p>
-
-        </div>
-
-
-
-        <!-- 03 -->
-
-        <div class="station locked">
-
-            <span class="lock">
-                🔒
-            </span>
-
-            <div class="station-number">
-                03
-            </div>
-
-            <div class="station-icon">
-                🏛️
-            </div>
-
-            <h3>
-                رحلة افتراضية في بلادي
-            </h3>
-
-            <p>
-
-                جولة بين مناطق
-
-                ومعالم المملكة
-
-                وثقافتها العريقة.
-
-            </p>
-
-        </div>
-
-
-
-        <!-- 04 -->
-
-        <div class="station locked">
-
-            <span class="lock">
-                🔒
-            </span>
-
-            <div class="station-number">
-                04
-            </div>
-
-            <div class="station-icon">
-                🌍
-            </div>
-
-            <h3>
-                المملكة وجهة العالم
-            </h3>
-
-            <p>
-
-                اكتشفي إنجازات المملكة
-
-                ومكانتها وحضورها
-
-                أمام العالم.
-
-            </p>
-
-        </div>
-
-
-    </div>
-
-
-
-    <div class="enter-section">
-
-        <button class="enter-button">
-
-            ابدئي المحطة الأولى
-            ←
-
-        </button>
-
-    </div>
-
+</div>
 
 </div>
 
@@ -846,55 +556,28 @@ and
 
 <script>
 
-
-/* =========================
-   بدء الرحلة
-========================= */
-
 function startJourney(){
 
-    document
-        .getElementById("home")
-        .style
-        .display="none";
+    document.getElementById("home")
+    .style.display="none";
 
+    document.getElementById("journey")
+    .style.display="block";
 
-    document
-        .getElementById("journey")
-        .style
-        .display="block";
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+    window.scrollTo(0,0);
 
 }
 
 
-/* =========================
-   الرجوع
-========================= */
-
 function goHome(){
 
-    document
-        .getElementById("journey")
-        .style
-        .display="none";
+    document.getElementById("journey")
+    .style.display="none";
 
+    document.getElementById("home")
+    .style.display="flex";
 
-    document
-        .getElementById("home")
-        .style
-        .display="flex";
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+    window.scrollTo(0,0);
 
 }
 
