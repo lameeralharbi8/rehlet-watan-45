@@ -1,1053 +1,1788 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>رحلة وطن | الإبتدائية الخامسة والأربعون</title>
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+:root{
+  --green:#00664c;
+  --green2:#004b39;
+  --green3:#00372b;
+  --gold:#d7ad55;
+  --gold2:#f4d77f;
+  --cream:#fff9e9;
+  --text:#073f32;
 }
+
+*{box-sizing:border-box;margin:0;padding:0}
 
 html,body{
-    width:100%;
-    min-height:100%;
-    font-family:Tahoma,Arial,sans-serif;
-    background:#004f3d;
+  width:100%;
+  min-height:100%;
+  font-family:Tahoma,Arial,sans-serif;
+  background:var(--green3);
 }
 
-body{
-    overflow-x:hidden;
+body{overflow-x:hidden}
+
+button{font-family:inherit}
+
+/* =====================================================
+   الصفحات
+===================================================== */
+
+.page{
+  display:none;
+  width:100%;
+  min-height:100svh;
 }
 
-/* ==================================================
-   الصفحة الأولى — الصورة الأصلية
-================================================== */
+.page.active{display:block}
 
-#home{
-    width:100%;
-    min-height:100vh;
-    min-height:100svh;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    background:#00513e;
-    overflow:hidden;
+/* =====================================================
+   الصفحة الأولى
+   لا نغير الصورة
+===================================================== */
+
+#home.active{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  background:#00513e;
+  overflow:hidden;
 }
 
 .cover{
-    position:relative;
-    width:100vw;
-    aspect-ratio:1488 / 1024;
-    overflow:hidden;
+  width:100vw;
+  aspect-ratio:1488/1024;
+  position:relative;
+  overflow:hidden;
 }
 
 .cover img{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:fill;
-    display:block;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:fill;
+  display:block;
 }
 
-/* منطقة ضغط شفافة فوق الزر الموجود بالصورة */
+/* الزر الشفاف فوق زر "ابدئي الرحلة" الموجود بالصورة */
 
-.start-button{
-    position:absolute;
-    left:36.3%;
-    top:48.8%;
-    width:27.4%;
-    height:9.5%;
-    border:0;
-    border-radius:60px;
-    background:transparent;
-    cursor:pointer;
-    z-index:20;
-    -webkit-tap-highlight-color:transparent;
+.start-hotspot{
+  position:absolute;
+  left:36.3%;
+  top:48.8%;
+  width:27.4%;
+  height:9.5%;
+  z-index:20;
+  border:0;
+  background:transparent;
+  border-radius:60px;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 
+/* =====================================================
+   الخلفية الموحدة
+===================================================== */
 
-/* ==================================================
-   صفحة مسار الرحلة
-================================================== */
-
-#journey{
-    display:none;
-    width:100%;
-    min-height:100vh;
-    min-height:100svh;
-    position:relative;
-    overflow:hidden;
-
-    background:
-      radial-gradient(
-        circle at 50% 10%,
-        #08745c 0%,
-        #045843 28%,
-        #003f31 65%,
-        #002d24 100%
-      );
-
-    color:white;
+.green-page{
+  position:relative;
+  overflow:hidden;
+  color:white;
+  background:
+    radial-gradient(circle at 50% 5%,#08775d 0%,#045943 30%,#003e30 68%,#002b22 100%);
 }
 
-
-/* توهج خلفي */
-
-#journey::before{
-    content:"";
-    position:absolute;
-    width:800px;
-    height:500px;
-    top:-280px;
-    left:50%;
-    transform:translateX(-50%);
-    border-radius:50%;
-    background:rgba(255,221,133,.13);
-    filter:blur(60px);
-    pointer-events:none;
+.green-page:before{
+  content:"";
+  position:absolute;
+  width:800px;
+  height:500px;
+  top:-330px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(255,222,130,.16);
+  border-radius:50%;
+  filter:blur(55px);
+  pointer-events:none;
 }
 
-
-/* الموجة السفلية */
-
-#journey::after{
-    content:"";
-    position:absolute;
-    width:120%;
-    height:230px;
-    left:-10%;
-    bottom:-150px;
-
-    border-radius:50% 50% 0 0;
-
-    background:
-      linear-gradient(
-        180deg,
-        #08735a,
-        #034b3a
-      );
-
-    border-top:3px solid rgba(218,177,75,.65);
-
-    pointer-events:none;
+.shell{
+  position:relative;
+  z-index:2;
+  width:min(94%,1450px);
+  margin:auto;
+  padding:22px 0 35px;
 }
 
+/* =====================================================
+   شريط علوي
+===================================================== */
 
-.journey-container{
-    width:100%;
-    max-width:1450px;
-    min-height:100svh;
-
-    margin:auto;
-
-    position:relative;
-    z-index:2;
-
-    padding:
-      max(22px,env(safe-area-inset-top))
-      38px
-      30px;
-
-    display:flex;
-    flex-direction:column;
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
 }
 
-
-/* ==================================================
-   أعلى الصفحة
-================================================== */
-
-.top-bar{
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.school{
+  color:#f4df9f;
+  font-weight:bold;
+  font-size:14px;
 }
 
-
-.back-button{
-    border:1px solid rgba(232,198,111,.65);
-    border-radius:30px;
-
-    padding:9px 18px;
-
-    background:rgba(0,50,38,.45);
-
-    color:#f8e3a3;
-
-    font-size:14px;
-    font-weight:bold;
-
-    cursor:pointer;
+.back{
+  border:1px solid rgba(235,201,112,.65);
+  background:rgba(0,40,31,.35);
+  color:#f5df9f;
+  border-radius:30px;
+  padding:9px 17px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
+/* =====================================================
+   العناوين
+===================================================== */
 
-.school-mini{
-    color:#f4e3af;
-    font-size:14px;
-    font-weight:bold;
+.header{
+  text-align:center;
+  margin:5px auto 15px;
 }
 
-
-/* ==================================================
-   العنوان
-================================================== */
-
-.journey-header{
-    text-align:center;
-    margin-top:2px;
+.eyebrow{
+  color:var(--gold2);
+  font-size:13px;
+  margin-bottom:3px;
 }
 
-
-.small-title{
-    color:#e6c66e;
-    font-size:14px;
-    letter-spacing:1px;
-    margin-bottom:3px;
+.header h1{
+  font-size:clamp(34px,4.4vw,62px);
+  line-height:1.25;
+  text-shadow:0 5px 18px rgba(0,0,0,.2);
 }
-
-
-.journey-title{
-    font-size:clamp(38px,4.5vw,64px);
-    color:white;
-    text-shadow:0 4px 18px rgba(0,0,0,.25);
-}
-
 
 .gold-line{
-    width:170px;
-    height:4px;
-
-    margin:7px auto 9px;
-
-    border-radius:20px;
-
-    background:
-      linear-gradient(
-        90deg,
-        transparent,
-        #f2d37d,
-        #d39d30,
-        #f2d37d,
-        transparent
-      );
+  width:150px;
+  height:4px;
+  margin:8px auto 10px;
+  border-radius:10px;
+  background:linear-gradient(90deg,transparent,var(--gold2),#b78322,var(--gold2),transparent);
 }
 
-
-.journey-subtitle{
-    color:#e6eee9;
-    font-size:16px;
-    line-height:1.6;
+.header p{
+  color:#e5eee9;
+  line-height:1.7;
+  font-size:15px;
 }
 
+/* =====================================================
+   الأزرار
+===================================================== */
 
-/* ==================================================
-   التقدم
-================================================== */
-
-.progress-section{
-    width:55%;
-    max-width:700px;
-
-    margin:15px auto 22px;
+.primary{
+  border:2px solid #e6c76c;
+  color:white;
+  background:linear-gradient(180deg,#0b8b67,#006047);
+  padding:13px 30px;
+  border-radius:50px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
+.primary:active{transform:scale(.97)}
+
+.secondary{
+  border:1px solid var(--gold);
+  color:var(--gold2);
+  background:rgba(0,60,45,.6);
+  padding:11px 22px;
+  border-radius:40px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* =====================================================
+   صفحة مسار الرحلة
+===================================================== */
+
+.progress-wrap{
+  width:min(650px,70%);
+  margin:13px auto 25px;
+}
 
 .progress-info{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    color:#f4dda0;
-
-    font-size:13px;
-    font-weight:bold;
-
-    margin-bottom:7px;
+  display:flex;
+  justify-content:space-between;
+  color:#f2d987;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:7px;
 }
-
 
 .progress{
-    width:100%;
-    height:9px;
-
-    border-radius:20px;
-
-    background:rgba(255,255,255,.15);
-
-    border:1px solid rgba(255,255,255,.12);
-
-    overflow:hidden;
+  height:9px;
+  background:rgba(255,255,255,.15);
+  border-radius:20px;
+  overflow:hidden;
 }
-
 
 .progress-bar{
-    width:4%;
-    height:100%;
-
-    border-radius:20px;
-
-    background:
-      linear-gradient(
-        90deg,
-        #c8942f,
-        #f6dd8a
-      );
-
-    box-shadow:
-      0 0 15px rgba(244,211,123,.8);
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,#bd8625,#ffe397);
+  border-radius:20px;
+  transition:.5s;
+  box-shadow:0 0 15px rgba(255,220,120,.7);
 }
-
-
-/* ==================================================
-   المحطات
-================================================== */
-
-.stations-wrapper{
-    width:100%;
-    position:relative;
-    margin-top:4px;
-}
-
-
-/* خط الرحلة */
-
-.route-line{
-    position:absolute;
-
-    width:76%;
-    height:3px;
-
-    top:47%;
-    left:12%;
-
-    border-top:3px dashed rgba(239,211,139,.55);
-
-    z-index:0;
-}
-
-
-/* النقاط الذهبية */
-
-.route-line::before,
-.route-line::after{
-    content:"";
-
-    position:absolute;
-
-    width:13px;
-    height:13px;
-
-    top:-8px;
-
-    border-radius:50%;
-
-    background:#f5d477;
-
-    box-shadow:
-      0 0 15px #f5d477;
-}
-
-.route-line::before{
-    left:0;
-}
-
-.route-line::after{
-    right:0;
-}
-
 
 .stations{
-    display:grid;
-
-    grid-template-columns:
-      repeat(4,1fr);
-
-    gap:25px;
-
-    position:relative;
-    z-index:1;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+  direction:rtl;
 }
-
-
-/* ==================================================
-   بطاقة المحطة
-================================================== */
 
 .station{
-    min-height:270px;
-
-    position:relative;
-
-    border-radius:28px;
-
-    padding:20px 15px;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-
-    background:
-      linear-gradient(
-        180deg,
-        rgba(9,102,78,.96) 0%,
-        rgba(5,75,57,.97) 58%,
-        #f7efd8 59%,
-        #fff9e9 100%
-      );
-
-    border:
-      2px solid rgba(224,187,91,.75);
-
-    box-shadow:
-      0 16px 30px rgba(0,0,0,.22);
-
-    overflow:hidden;
+  position:relative;
+  min-height:270px;
+  border:2px solid rgba(224,187,91,.75);
+  border-radius:28px;
+  overflow:hidden;
+  padding:18px;
+  text-align:center;
+  cursor:pointer;
+  background:
+    linear-gradient(180deg,
+      rgba(9,102,78,.98) 0%,
+      rgba(5,75,57,.98) 61%,
+      #fff6dc 61%,
+      #fffaf0 100%);
+  box-shadow:0 16px 30px rgba(0,0,0,.22);
+  transition:.25s;
 }
 
+.station:not(.locked):hover{transform:translateY(-6px)}
 
-/* المحطة الحالية */
-
-.station.active{
-    border:3px solid #f1cf72;
-
-    transform:translateY(-8px);
-
-    box-shadow:
-      0 0 0 4px rgba(229,192,92,.12),
-      0 0 30px rgba(242,208,113,.27),
-      0 20px 35px rgba(0,0,0,.28);
+.station.current{
+  border:3px solid #f3d478;
+  box-shadow:0 0 28px rgba(242,208,113,.28),0 20px 35px rgba(0,0,0,.28);
 }
-
-
-/* توهج المحطة الحالية */
-
-.station.active::before{
-    content:"";
-
-    position:absolute;
-
-    width:130px;
-    height:130px;
-
-    top:-50px;
-
-    border-radius:50%;
-
-    background:rgba(255,224,131,.18);
-
-    filter:blur(20px);
-}
-
-
-/* المقفلة */
 
 .station.locked{
-    filter:saturate(.70);
+  filter:saturate(.55);
+  opacity:.7;
+  cursor:not-allowed;
 }
 
-.station.locked .station-content{
-    opacity:.72;
+.station.done{
+  border-color:#f3d478;
 }
 
-
-/* رقم المحطة */
-
-.station-number{
-    position:absolute;
-
-    top:13px;
-    right:14px;
-
-    width:48px;
-    height:34px;
-
-    border-radius:20px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:
-      linear-gradient(
-        135deg,
-        #c5912b,
-        #f1d273
-      );
-
-    color:#064a38;
-
-    font-size:15px;
-    font-weight:bold;
-
-    border:1px solid #ffe8a1;
+.station-num{
+  position:absolute;
+  right:13px;
+  top:13px;
+  background:linear-gradient(135deg,#c28c27,#f2d375);
+  color:#064a38;
+  border-radius:20px;
+  padding:7px 14px;
+  font-weight:bold;
 }
-
-
-/* القفل */
 
 .lock{
-    position:absolute;
-
-    top:17px;
-    left:17px;
-
-    font-size:18px;
-
-    filter:drop-shadow(0 3px 4px rgba(0,0,0,.25));
+  position:absolute;
+  left:15px;
+  top:16px;
 }
-
-
-/* محتوى البطاقة */
-
-.station-content{
-    width:100%;
-    height:100%;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    position:relative;
-    z-index:2;
-}
-
 
 .station-icon{
-    font-size:52px;
-    margin-bottom:15px;
-
-    filter:
-      drop-shadow(
-        0 6px 6px
-        rgba(0,0,0,.18)
-      );
+  font-size:51px;
+  margin:32px 0 12px;
 }
-
 
 .station h3{
-    color:white;
-
-    font-size:21px;
-
-    line-height:1.5;
-
-    margin-bottom:22px;
+  color:white;
+  min-height:62px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:20px;
+  line-height:1.5;
 }
-
 
 .station p{
-    color:#365f53;
-
-    font-size:13px;
-
-    line-height:1.6;
-
-    min-height:40px;
-
-    display:flex;
-    align-items:center;
+  color:#3f6259;
+  font-size:13px;
+  line-height:1.6;
+  padding-top:16px;
 }
 
-
-/* الشارة الحالية */
-
-.current-badge{
-    position:absolute;
-
-    bottom:7px;
-
-    background:#d3a442;
-
-    color:#064a38;
-
-    padding:5px 15px;
-
-    border-radius:20px;
-
-    font-size:11px;
-
-    font-weight:bold;
+.status{
+  display:inline-block;
+  margin-top:8px;
+  padding:4px 12px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+  background:#d7ad55;
+  color:#064536;
 }
 
-
-/* ==================================================
-   زر بدء المحطة
-================================================== */
-
-.enter-area{
-    margin-top:25px;
-    text-align:center;
+.route-bottom{
+  text-align:center;
+  margin-top:24px;
+  color:#e3c977;
+  font-size:13px;
 }
 
+/* =====================================================
+   صفحات المحطات
+===================================================== */
 
-.enter-button{
-    min-width:290px;
-
-    padding:14px 32px;
-
-    border-radius:50px;
-
-    border:2px solid #e5c66e;
-
-    background:
-      linear-gradient(
-        180deg,
-        #0b8b67,
-        #00664c
-      );
-
-    color:white;
-
-    font-size:18px;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    box-shadow:
-      0 10px 25px rgba(0,0,0,.25),
-      inset 0 1px 0 rgba(255,255,255,.35);
+.station-page .shell{
+  width:min(92%,1150px);
 }
 
-
-.enter-button:active{
-    transform:scale(.97);
+.activity-card{
+  background:rgba(255,250,237,.97);
+  color:var(--text);
+  border:2px solid var(--gold);
+  border-radius:30px;
+  padding:28px;
+  box-shadow:0 20px 50px rgba(0,0,0,.22);
+  max-width:1000px;
+  margin:15px auto;
 }
 
-
-/* ==================================================
-   العبارة السفلية
-================================================== */
-
-.footer-message{
-    text-align:center;
-
-    color:#dfc77f;
-
-    font-size:13px;
-
-    margin-top:13px;
+.activity-card h2{
+  color:var(--green);
+  margin-bottom:14px;
+  font-size:25px;
 }
 
-
-/* ==================================================
-   الآيباد الأفقي
-================================================== */
-
-@media
-(min-width:700px)
-and
-(orientation:landscape){
-
-    .journey-container{
-        padding-top:18px;
-    }
-
-    .station{
-        min-height:250px;
-    }
-
+.activity-card p{
+  line-height:1.9;
+  color:#48645b;
 }
 
+.fact-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:20px;
+}
 
-/* ==================================================
-   شاشات أصغر
-================================================== */
+.fact{
+  background:#f3f7f2;
+  border:1px solid #d9e4da;
+  border-radius:20px;
+  padding:18px 12px;
+  text-align:center;
+}
+
+.fact .big{
+  font-size:34px;
+  margin-bottom:8px;
+}
+
+.fact strong{
+  display:block;
+  color:var(--green);
+  margin-bottom:6px;
+}
+
+.fact span{
+  font-size:13px;
+  line-height:1.6;
+  color:#65776f;
+}
+
+/* =====================================================
+   الاختيارات
+===================================================== */
+
+.question{
+  margin-top:22px;
+  background:#eef5ef;
+  border-radius:22px;
+  padding:20px;
+}
+
+.question h3{
+  color:#075a44;
+  margin-bottom:14px;
+  line-height:1.6;
+}
+
+.answers{
+  display:grid;
+  gap:10px;
+}
+
+.answer{
+  width:100%;
+  border:1px solid #cadbd0;
+  background:white;
+  color:#174c3d;
+  padding:13px 15px;
+  border-radius:15px;
+  text-align:right;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.answer:hover{
+  border-color:#b89036;
+  background:#fff9e9;
+}
+
+.answer.correct{
+  background:#dff3e6;
+  border-color:#459766;
+}
+
+.answer.wrong{
+  background:#f8e1dd;
+  border-color:#c56b5c;
+}
+
+.feedback{
+  min-height:28px;
+  margin-top:10px;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.actions{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+/* =====================================================
+   المحطة الثانية - المواقف
+===================================================== */
+
+.scenario{
+  background:#f3f7f2;
+  border-radius:20px;
+  padding:20px;
+  margin-top:15px;
+}
+
+.scenario h3{
+  color:#075a44;
+  margin-bottom:12px;
+}
+
+.choice-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.choice{
+  border:1px solid #cfddd3;
+  background:white;
+  padding:13px;
+  border-radius:15px;
+  cursor:pointer;
+  color:#174c3d;
+  font-weight:bold;
+}
+
+.choice.good{
+  background:#dff3e6;
+  border-color:#4c9a69;
+}
+
+.choice.bad{
+  background:#f8e1dd;
+  border-color:#c56b5c;
+}
+
+/* =====================================================
+   المحطة الثالثة - الجولة
+===================================================== */
+
+.places{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:20px;
+}
+
+.place{
+  border:1px solid #d5dfd7;
+  background:#f5f8f5;
+  border-radius:22px;
+  padding:18px 10px;
+  text-align:center;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.place:hover,
+.place.visited{
+  transform:translateY(-4px);
+  border-color:var(--gold);
+  background:#fff8e5;
+}
+
+.place .emoji{
+  font-size:40px;
+  display:block;
+  margin-bottom:8px;
+}
+
+.place strong{
+  color:var(--green);
+}
+
+.place-info{
+  margin-top:16px;
+  padding:17px;
+  min-height:90px;
+  border-radius:18px;
+  background:#eef5ef;
+  color:#48645b;
+  line-height:1.8;
+}
+
+/* =====================================================
+   المحطة الرابعة
+===================================================== */
+
+.world-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:20px;
+}
+
+.world-item{
+  padding:20px 12px;
+  border-radius:20px;
+  text-align:center;
+  background:#f3f7f2;
+  border:1px solid #d6e1d8;
+}
+
+.world-item .emoji{
+  font-size:39px;
+  display:block;
+  margin-bottom:9px;
+}
+
+.world-item strong{
+  color:var(--green);
+  display:block;
+  margin-bottom:7px;
+}
+
+.world-item p{
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* =====================================================
+   شاشة النهاية
+===================================================== */
+
+#finish.active{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.finish-card{
+  position:relative;
+  z-index:2;
+  width:min(90%,780px);
+  padding:45px 30px;
+  border:3px solid #e3c05f;
+  border-radius:38px;
+  background:rgba(255,249,232,.98);
+  color:var(--green);
+  box-shadow:0 25px 60px rgba(0,0,0,.3);
+}
+
+.medal{
+  font-size:80px;
+  margin-bottom:12px;
+}
+
+.finish-card h1{
+  font-size:clamp(36px,6vw,65px);
+}
+
+.finish-card h2{
+  color:#a67821;
+  margin:10px 0 18px;
+  font-size:27px;
+}
+
+.finish-card p{
+  color:#526b62;
+  line-height:1.9;
+}
+
+.student-name{
+  width:min(90%,450px);
+  padding:13px 16px;
+  border-radius:15px;
+  border:1px solid #cdb66e;
+  font-size:16px;
+  text-align:center;
+  margin:20px 0 10px;
+}
+
+/* =====================================================
+   Responsive
+===================================================== */
 
 @media(max-width:900px){
-
-    #journey{
-        overflow:auto;
-    }
-
-    .journey-container{
-        padding:25px 20px 50px;
-    }
-
-    .stations{
-        grid-template-columns:
-          repeat(2,1fr);
-    }
-
-    .route-line{
-        display:none;
-    }
-
-    .progress-section{
-        width:80%;
-    }
-
+  .stations{grid-template-columns:repeat(2,1fr)}
+  .fact-grid{grid-template-columns:1fr}
+  .places{grid-template-columns:repeat(2,1fr)}
+  .world-grid{grid-template-columns:1fr}
+  .progress-wrap{width:85%}
 }
 
-
-/* ==================================================
-   الجوال
-================================================== */
-
-@media(max-width:550px){
-
-    .stations{
-        grid-template-columns:1fr;
-    }
-
-    .station{
-        min-height:240px;
-    }
-
-    .progress-section{
-        width:95%;
-    }
-
-    .school-mini{
-        display:none;
-    }
-
+@media(max-width:560px){
+  .stations{grid-template-columns:1fr}
+  .places{grid-template-columns:1fr}
+  .choice-row{grid-template-columns:1fr}
+  .school{display:none}
+  .activity-card{padding:20px 15px}
 }
-
 </style>
 </head>
 
-
 <body>
 
+<!-- =====================================================
+     1 — الواجهة الرئيسية
+===================================================== -->
 
-<!-- ==================================================
-     الصفحة الأولى
-================================================== -->
+<section id="home" class="page active">
 
-<section id="home">
+  <div class="cover">
 
-<div class="cover">
-
-    <img
-      src="watan-cover.jpg"
-      alt="رحلة وطن">
+    <img src="watan-cover.jpg" alt="رحلة وطن">
 
     <button
-      class="start-button"
-      onclick="startJourney()"
+      class="start-hotspot"
+      onclick="showPage('journey')"
       aria-label="ابدئي الرحلة">
     </button>
 
-</div>
+  </div>
 
 </section>
 
 
+<!-- =====================================================
+     2 — مسار رحلة وطن
+===================================================== -->
 
-<!-- ==================================================
-     صفحة الرحلة
-================================================== -->
+<section id="journey" class="page green-page">
 
-<section id="journey">
+<div class="shell">
 
-<div class="journey-container">
+  <div class="topbar">
+
+    <div class="school">
+      الإبتدائية الخامسة والأربعون 🇸🇦
+    </div>
+
+    <button class="back" onclick="showPage('home')">
+      العودة للرئيسية ↩
+    </button>
+
+  </div>
+
+  <div class="header">
+
+    <div class="eyebrow">
+      ✦ نحو رؤية المملكة 2030 ✦
+    </div>
+
+    <h1>مسار رحلة وطن</h1>
+
+    <div class="gold-line"></div>
+
+    <p>
+      أربع محطات تفاعلية لاكتشاف رؤيتنا،
+      وطننا ومسؤوليتنا تجاهه
+    </p>
+
+  </div>
+
+  <div class="progress-wrap">
+
+    <div class="progress-info">
+      <span>تقدم الرحلة</span>
+      <span id="progressText">٠٪</span>
+    </div>
+
+    <div class="progress">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+
+  </div>
 
 
-    <!-- أعلى الصفحة -->
+  <div class="stations">
 
-    <div class="top-bar">
+    <div id="station1Card"
+         class="station current"
+         onclick="openStation(1)">
 
-        <div class="school-mini">
-            الإبتدائية الخامسة والأربعون 🇸🇦
-        </div>
+      <div class="station-num">01</div>
 
-        <button
-          class="back-button"
-          onclick="goHome()">
+      <div class="station-icon">💡</div>
 
-            العودة للرئيسية ↩
+      <h3>تعريف برؤية 2030</h3>
 
-        </button>
+      <p>
+        اكتشفي رؤية المملكة وطموحات وطننا نحو المستقبل.
+      </p>
+
+      <span class="status" id="status1">
+        ابدئي هنا
+      </span>
 
     </div>
 
 
+    <div id="station2Card"
+         class="station locked"
+         onclick="openStation(2)">
 
-    <!-- العنوان -->
+      <div class="station-num">02</div>
 
-    <div class="journey-header">
+      <span class="lock" id="lock2">🔒</span>
 
-        <div class="small-title">
-            ✦ نحو رؤية المملكة 2030 ✦
-        </div>
+      <div class="station-icon">🌱</div>
 
-        <h1 class="journey-title">
-            مسار رحلة وطن
-        </h1>
+      <h3>أكون مواطنة مسؤولة</h3>
 
-        <div class="gold-line"></div>
+      <p>
+        مواقف واختيارات تعزز المسؤولية الوطنية.
+      </p>
 
-        <p class="journey-subtitle">
-            أربع محطات تفاعلية لاكتشاف رؤيتنا،
-            وطننا ومسؤوليتنا تجاهه
+      <span class="status" id="status2">
+        مقفلة
+      </span>
+
+    </div>
+
+
+    <div id="station3Card"
+         class="station locked"
+         onclick="openStation(3)">
+
+      <div class="station-num">03</div>
+
+      <span class="lock" id="lock3">🔒</span>
+
+      <div class="station-icon">🏛️</div>
+
+      <h3>رحلة افتراضية في بلادي</h3>
+
+      <p>
+        جولة تفاعلية بين مناطق المملكة ومعالمها.
+      </p>
+
+      <span class="status" id="status3">
+        مقفلة
+      </span>
+
+    </div>
+
+
+    <div id="station4Card"
+         class="station locked"
+         onclick="openStation(4)">
+
+      <div class="station-num">04</div>
+
+      <span class="lock" id="lock4">🔒</span>
+
+      <div class="station-icon">🌍</div>
+
+      <h3>المملكة وجهة العالم</h3>
+
+      <p>
+        اكتشفي حضور المملكة ومكانتها عالميًا.
+      </p>
+
+      <span class="status" id="status4">
+        مقفلة
+      </span>
+
+    </div>
+
+  </div>
+
+  <div class="route-bottom">
+    معًا نبني وعيًا لنصنع مستقبلًا مشرقًا 🇸🇦
+  </div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     3 — المحطة الأولى
+===================================================== -->
+
+<section id="station1" class="page green-page station-page">
+
+<div class="shell">
+
+  <div class="topbar">
+    <div class="school">المحطة 01</div>
+    <button class="back" onclick="showPage('journey')">
+      العودة للمسار ↩
+    </button>
+  </div>
+
+  <div class="header">
+    <div class="eyebrow">المحطة الأولى</div>
+    <h1>💡 تعريف برؤية 2030</h1>
+    <div class="gold-line"></div>
+    <p>نتعرف على رؤيتنا وطموحات وطننا للمستقبل.</p>
+  </div>
+
+
+  <div class="activity-card">
+
+    <h2>ما هي رؤية السعودية 2030؟ 🇸🇦</h2>
+
+    <p>
+      رؤية السعودية 2030 هي رؤية طموحة لمستقبل المملكة،
+      تهدف إلى بناء وطن مزدهر، وتنويع الاقتصاد،
+      وتطوير جودة الحياة، واستثمار قدرات أبناء وبنات الوطن.
+    </p>
+
+
+    <div class="fact-grid">
+
+      <div class="fact">
+        <div class="big">🌱</div>
+        <strong>مجتمع حيوي</strong>
+        <span>
+          مجتمع يتمتع بحياة عامرة وصحية وجودة حياة أفضل.
+        </span>
+      </div>
+
+      <div class="fact">
+        <div class="big">📈</div>
+        <strong>اقتصاد مزدهر</strong>
+        <span>
+          اقتصاد متنوع يوفر الفرص ويستثمر في المستقبل.
+        </span>
+      </div>
+
+      <div class="fact">
+        <div class="big">🇸🇦</div>
+        <strong>وطن طموح</strong>
+        <span>
+          وطن مسؤول وفعّال يحقق الإنجازات بطموح أبنائه.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="question">
+
+      <h3>
+        🎯 أي مما يلي يُعد من محاور رؤية السعودية 2030؟
+      </h3>
+
+      <div class="answers">
+
+        <button class="answer"
+          onclick="answerOne(this,true)">
+          مجتمع حيوي
+        </button>
+
+        <button class="answer"
+          onclick="answerOne(this,false)">
+          مجتمع بلا طموح
+        </button>
+
+        <button class="answer"
+          onclick="answerOne(this,false)">
+          الاعتماد على مصدر واحد فقط
+        </button>
+
+      </div>
+
+      <div id="feedback1" class="feedback"></div>
+
+    </div>
+
+
+    <div class="actions">
+
+      <button id="complete1"
+        class="primary"
+        style="display:none"
+        onclick="completeStation(1)">
+        ✓ إكمال المحطة الأولى
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     4 — المحطة الثانية
+===================================================== -->
+
+<section id="station2" class="page green-page station-page">
+
+<div class="shell">
+
+  <div class="topbar">
+    <div class="school">المحطة 02</div>
+    <button class="back" onclick="showPage('journey')">
+      العودة للمسار ↩
+    </button>
+  </div>
+
+  <div class="header">
+    <div class="eyebrow">المحطة الثانية</div>
+    <h1>🌱 أكون مواطنة مسؤولة</h1>
+    <div class="gold-line"></div>
+    <p>
+      اختاري التصرف الصحيح في المواقف التالية.
+    </p>
+  </div>
+
+
+  <div class="activity-card">
+
+    <h2>المواطنة تبدأ من تصرفاتنا 🤍</h2>
+
+    <p>
+      المواطنة المسؤولة تعني المحافظة على وطننا،
+      احترام الأنظمة، المحافظة على الممتلكات العامة،
+      والمساهمة بإيجابية في المجتمع.
+    </p>
+
+
+    <div class="scenario">
+
+      <h3>
+        1. رأيتِ مخلفات في مكان عام، ماذا تفعلين؟
+      </h3>
+
+      <div class="choice-row">
+
+        <button class="choice"
+          onclick="scenarioAnswer(this,true,1)">
+          أضعها في المكان المخصص للنفايات ✓
+        </button>
+
+        <button class="choice"
+          onclick="scenarioAnswer(this,false,1)">
+          أتركها كما هي
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="scenario">
+
+      <h3>
+        2. شاهدتِ شخصًا يعبث بممتلكات المدرسة، ماذا تفعلين؟
+      </h3>
+
+      <div class="choice-row">
+
+        <button class="choice"
+          onclick="scenarioAnswer(this,true,2)">
+          أنصحه وأبلغ المسؤولة عند الحاجة ✓
+        </button>
+
+        <button class="choice"
+          onclick="scenarioAnswer(this,false,2)">
+          أشاركه العبث
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="scenario">
+
+      <h3>
+        3. كيف تساهمين في خدمة وطنك؟
+      </h3>
+
+      <div class="choice-row">
+
+        <button class="choice"
+          onclick="scenarioAnswer(this,true,3)">
+          بالتعلم والإتقان والمحافظة على الممتلكات ✓
+        </button>
+
+        <button class="choice"
+          onclick="scenarioAnswer(this,false,3)">
+          بعدم الاهتمام بمسؤوليتي
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div id="feedback2" class="feedback"></div>
+
+
+    <div class="actions">
+
+      <button id="complete2"
+        class="primary"
+        style="display:none"
+        onclick="completeStation(2)">
+        ✓ إكمال المحطة الثانية
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     5 — المحطة الثالثة
+===================================================== -->
+
+<section id="station3" class="page green-page station-page">
+
+<div class="shell">
+
+  <div class="topbar">
+    <div class="school">المحطة 03</div>
+    <button class="back" onclick="showPage('journey')">
+      العودة للمسار ↩
+    </button>
+  </div>
+
+
+  <div class="header">
+
+    <div class="eyebrow">المحطة الثالثة</div>
+
+    <h1>🏛️ رحلة افتراضية في بلادي</h1>
+
+    <div class="gold-line"></div>
+
+    <p>
+      اضغطي على كل وجهة لزيارتها واكتشافها.
+    </p>
+
+  </div>
+
+
+  <div class="activity-card">
+
+    <h2>جولة في وطننا 🇸🇦</h2>
+
+    <p>
+      المملكة وطن واسع غني بالتاريخ والثقافة
+      والطبيعة والمعالم المميزة.
+      زوري الوجهات الأربع لإكمال جولتك.
+    </p>
+
+
+    <div class="places">
+
+      <div class="place"
+        onclick="visitPlace(this,1,'الرياض عاصمة المملكة، وتجمع بين التاريخ والتطور الحديث، وتضم العديد من المشروعات والمعالم الوطنية.')">
+
+        <span class="emoji">🏙️</span>
+        <strong>الرياض</strong>
+
+      </div>
+
+
+      <div class="place"
+        onclick="visitPlace(this,2,'العُلا وجهة تاريخية وثقافية مميزة، تشتهر بتكويناتها الطبيعية وآثارها العريقة.')">
+
+        <span class="emoji">🏜️</span>
+        <strong>العُلا</strong>
+
+      </div>
+
+
+      <div class="place"
+        onclick="visitPlace(this,3,'مكة المكرمة أطهر البقاع وقبلة المسلمين، وتستقبل ملايين الزوار من مختلف أنحاء العالم.')">
+
+        <span class="emoji">🕋</span>
+        <strong>مكة المكرمة</strong>
+
+      </div>
+
+
+      <div class="place"
+        onclick="visitPlace(this,4,'أبها من أبرز الوجهات السياحية في المملكة، وتتميز بطبيعتها الجميلة وأجوائها الجبلية.')">
+
+        <span class="emoji">⛰️</span>
+        <strong>أبها</strong>
+
+      </div>
+
+    </div>
+
+
+    <div id="placeInfo" class="place-info">
+      👆 اختاري إحدى الوجهات لبدء الجولة.
+    </div>
+
+
+    <div class="actions">
+
+      <button id="complete3"
+        class="primary"
+        style="display:none"
+        onclick="completeStation(3)">
+        ✓ أنهيت جولتي في بلادي
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     6 — المحطة الرابعة
+===================================================== -->
+
+<section id="station4" class="page green-page station-page">
+
+<div class="shell">
+
+  <div class="topbar">
+    <div class="school">المحطة 04</div>
+    <button class="back" onclick="showPage('journey')">
+      العودة للمسار ↩
+    </button>
+  </div>
+
+
+  <div class="header">
+
+    <div class="eyebrow">المحطة الرابعة</div>
+
+    <h1>🌍 المملكة وجهة العالم</h1>
+
+    <div class="gold-line"></div>
+
+    <p>
+      وطننا حاضر عالميًا بطموحه وثقافته وإنجازاته.
+    </p>
+
+  </div>
+
+
+  <div class="activity-card">
+
+    <h2>السعودية نحو العالم ✨</h2>
+
+    <p>
+      تشهد المملكة تطورًا متسارعًا في مجالات متعددة،
+      وتستضيف فعاليات ومشروعات تجذب الزوار
+      وتعرّف العالم بثقافة المملكة وطموحاتها.
+    </p>
+
+
+    <div class="world-grid">
+
+      <div class="world-item">
+
+        <span class="emoji">✈️</span>
+
+        <strong>السياحة</strong>
+
+        <p>
+          وجهات متنوعة تجمع بين التاريخ والطبيعة
+          والثقافة والتجارب الحديثة.
         </p>
 
-    </div>
+      </div>
 
 
+      <div class="world-item">
 
-    <!-- التقدم -->
+        <span class="emoji">🏆</span>
 
-    <div class="progress-section">
+        <strong>الفعاليات العالمية</strong>
 
-        <div class="progress-info">
+        <p>
+          حضور متنامٍ في الفعاليات الرياضية
+          والثقافية والترفيهية العالمية.
+        </p>
 
-            <span>
-                تقدم الرحلة
-            </span>
+      </div>
 
-            <span>
-                ٠٪
-            </span>
 
-        </div>
+      <div class="world-item">
 
-        <div class="progress">
+        <span class="emoji">🚀</span>
 
-            <div class="progress-bar"></div>
+        <strong>المستقبل والابتكار</strong>
 
-        </div>
+        <p>
+          مشروعات وطموحات تستثمر في الإنسان
+          والتقنية ومستقبل الأجيال القادمة.
+        </p>
 
-    </div>
-
-
-
-    <!-- المحطات -->
-
-    <div class="stations-wrapper">
-
-        <div class="route-line"></div>
-
-
-        <div class="stations">
-
-
-            <!-- 01 -->
-
-            <div class="station active">
-
-                <div class="station-number">
-                    01
-                </div>
-
-                <div class="station-content">
-
-                    <div class="station-icon">
-                        💡
-                    </div>
-
-                    <h3>
-                        تعريف برؤية<br>
-                        2030
-                    </h3>
-
-                    <p>
-                        اكتشفي رؤية المملكة وطموحات
-                        وطننا نحو المستقبل.
-                    </p>
-
-                </div>
-
-                <div class="current-badge">
-                    المحطة الحالية
-                </div>
-
-            </div>
-
-
-
-            <!-- 02 -->
-
-            <div class="station locked">
-
-                <div class="station-number">
-                    02
-                </div>
-
-                <span class="lock">
-                    🔒
-                </span>
-
-                <div class="station-content">
-
-                    <div class="station-icon">
-                        🌱
-                    </div>
-
-                    <h3>
-                        أكون مواطنة<br>
-                        مسؤولة
-                    </h3>
-
-                    <p>
-                        اختيارات ومواقف تفاعلية
-                        تعزز المسؤولية الوطنية.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- 03 -->
-
-            <div class="station locked">
-
-                <div class="station-number">
-                    03
-                </div>
-
-                <span class="lock">
-                    🔒
-                </span>
-
-                <div class="station-content">
-
-                    <div class="station-icon">
-                        🏛️
-                    </div>
-
-                    <h3>
-                        رحلة افتراضية<br>
-                        في بلادي
-                    </h3>
-
-                    <p>
-                        جولة بين مناطق المملكة
-                        ومعالمها وثقافتها.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- 04 -->
-
-            <div class="station locked">
-
-                <div class="station-number">
-                    04
-                </div>
-
-                <span class="lock">
-                    🔒
-                </span>
-
-                <div class="station-content">
-
-                    <div class="station-icon">
-                        🌍
-                    </div>
-
-                    <h3>
-                        المملكة<br>
-                        وجهة العالم
-                    </h3>
-
-                    <p>
-                        اكتشفي مكانة المملكة
-                        وحضورها وإنجازاتها عالميًا.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-        </div>
+      </div>
 
     </div>
 
 
+    <div class="question">
 
-    <!-- الزر -->
+      <h3>
+        🎯 ما الذي يجعل المملكة وجهة عالمية؟
+      </h3>
 
-    <div class="enter-area">
+      <div class="answers">
 
-        <button
-          class="enter-button"
-          onclick="openStationOne()">
-
-            ابدئي المحطة الأولى
-            ←
-
+        <button class="answer"
+          onclick="answerFour(this,true)">
+          تنوعها الثقافي والسياحي ومشروعاتها وطموحاتها
         </button>
 
+        <button class="answer"
+          onclick="answerFour(this,false)">
+          عدم الاهتمام بالتطوير
+        </button>
+
+        <button class="answer"
+          onclick="answerFour(this,false)">
+          الابتعاد عن الابتكار
+        </button>
+
+      </div>
+
+      <div id="feedback4" class="feedback"></div>
+
     </div>
 
 
-    <div class="footer-message">
-        معًا نبني وعيًا لنصنع مستقبلًا مشرقًا 🇸🇦
+    <div class="actions">
+
+      <button id="complete4"
+        class="primary"
+        style="display:none"
+        onclick="completeStation(4)">
+        🏅 إكمال رحلة وطن
+      </button>
+
     </div>
 
+  </div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     7 — النهاية
+===================================================== -->
+
+<section id="finish" class="page green-page">
+
+<div class="finish-card">
+
+  <div class="medal">
+    🏅
+  </div>
+
+  <h1>
+    أتممتِ رحلة وطن!
+  </h1>
+
+  <h2>
+    🇸🇦 سفيرة الوعي الوطني 🇸🇦
+  </h2>
+
+  <p>
+    أحسنتِ! أكملتِ المحطات الأربع،
+    وتعرفتِ على رؤية وطننا،
+    ومسؤوليتنا تجاهه،
+    وجمال المملكة ومكانتها في العالم.
+  </p>
+
+  <input
+    class="student-name"
+    id="studentName"
+    type="text"
+    placeholder="اكتبي اسمك هنا ✨">
+
+
+  <p>
+    <strong>
+      الإبتدائية الخامسة والأربعون
+    </strong>
+    <br>
+    المعلمة: دار الهناء الحربي
+    &nbsp; • &nbsp;
+    الصف: ٢/١
+    &nbsp; • &nbsp;
+    مديرة المدرسة: هبة فلمبان
+  </p>
+
+
+  <div class="actions">
+
+    <button class="primary"
+      onclick="restartJourney()">
+      ↻ ابدئي الرحلة من جديد
+    </button>
+
+  </div>
 
 </div>
 
 </section>
-
 
 
 <script>
 
-/* فتح مسار الرحلة */
+/* =====================================================
+   حالة الرحلة
+===================================================== */
 
-function startJourney(){
+let completed = 0;
 
-    document
-      .getElementById("home")
-      .style.display="none";
+let scenarioDone = {
+  1:false,
+  2:false,
+  3:false
+};
 
-    document
-      .getElementById("journey")
-      .style.display="block";
+let visitedPlaces = new Set();
 
-    window.scrollTo(0,0);
+
+/* =====================================================
+   التنقل
+===================================================== */
+
+function showPage(id){
+
+  document.querySelectorAll(".page")
+    .forEach(page => page.classList.remove("active"));
+
+  document.getElementById(id)
+    .classList.add("active");
+
+  window.scrollTo(0,0);
+
+  if(id === "journey"){
+    updateJourney();
+  }
 }
 
 
-/* الرجوع */
+/* =====================================================
+   فتح المحطات
+===================================================== */
 
-function goHome(){
+function openStation(number){
 
-    document
-      .getElementById("journey")
-      .style.display="none";
+  if(number > completed + 1){
+    return;
+  }
 
-    document
-      .getElementById("home")
-      .style.display="flex";
-
-    window.scrollTo(0,0);
+  showPage("station" + number);
 }
 
 
-/* المحطة الأولى */
+/* =====================================================
+   السؤال الأول
+===================================================== */
 
-function openStationOne(){
+function answerOne(button,correct){
 
-    alert("المحطة الأولى جاهزة للإضافة ✨");
+  document.querySelectorAll("#station1 .answer")
+    .forEach(b=>{
+      b.classList.remove("correct","wrong");
+    });
 
+  const feedback =
+    document.getElementById("feedback1");
+
+  if(correct){
+
+    button.classList.add("correct");
+
+    feedback.innerHTML =
+      "👏 إجابة صحيحة! مجتمع حيوي هو أحد محاور رؤية السعودية 2030.";
+
+    feedback.style.color="#28764a";
+
+    document.getElementById("complete1")
+      .style.display="inline-block";
+
+  }else{
+
+    button.classList.add("wrong");
+
+    feedback.innerHTML =
+      "حاولي مرة أخرى 🌟 فكري في محاور الرؤية الثلاثة.";
+
+    feedback.style.color="#a34d3f";
+
+  }
 }
+
+
+/* =====================================================
+   مواقف المحطة الثانية
+===================================================== */
+
+function scenarioAnswer(button,correct,num){
+
+  const parent = button.parentElement;
+
+  parent.querySelectorAll(".choice")
+    .forEach(b=>{
+      b.classList.remove("good","bad");
+    });
+
+  if(correct){
+
+    button.classList.add("good");
+
+    scenarioDone[num]=true;
+
+  }else{
+
+    button.classList.add("bad");
+
+  }
+
+  const feedback =
+    document.getElementById("feedback2");
+
+  const total =
+    Object.values(scenarioDone)
+      .filter(Boolean).length;
+
+  if(total === 3){
+
+    feedback.innerHTML =
+      "👏 ممتاز! اختياراتك تدل على مواطنة مسؤولة.";
+
+    feedback.style.color="#28764a";
+
+    document.getElementById("complete2")
+      .style.display="inline-block";
+
+  }else if(correct){
+
+    feedback.innerHTML =
+      "أحسنتِ 🌟 بقي " + (3-total) + " من المواقف.";
+
+    feedback.style.color="#28764a";
+
+  }else{
+
+    feedback.innerHTML =
+      "فكري في التصرف الذي يحافظ على وطنك ومجتمعك 💚";
+
+    feedback.style.color="#a34d3f";
+
+  }
+}
+
+
+/* =====================================================
+   المحطة الثالثة
+===================================================== */
+
+function visitPlace(element,number,text){
+
+  element.classList.add("visited");
+
+  visitedPlaces.add(number);
+
+  document.getElementById("placeInfo")
+    .innerHTML="📍 " + text;
+
+  if(visitedPlaces.size === 4){
+
+    document.getElementById("placeInfo")
+      .innerHTML +=
+      "<br><strong>👏 أحسنتِ! زرتِ جميع الوجهات.</strong>";
+
+    document.getElementById("complete3")
+      .style.display="inline-block";
+  }
+}
+
+
+/* =====================================================
+   السؤال الرابع
+===================================================== */
+
+function answerFour(button,correct){
+
+  document.querySelectorAll("#station4 .answer")
+    .forEach(b=>{
+      b.classList.remove("correct","wrong");
+    });
+
+  const feedback =
+    document.getElementById("feedback4");
+
+  if(correct){
+
+    button.classList.add("correct");
+
+    feedback.innerHTML =
+      "👏 رائع! التنوع والطموح والتطوير يعززون مكانة المملكة عالميًا.";
+
+    feedback.style.color="#28764a";
+
+    document.getElementById("complete4")
+      .style.display="inline-block";
+
+  }else{
+
+    button.classList.add("wrong");
+
+    feedback.innerHTML =
+      "حاولي مرة أخرى 🌟";
+
+    feedback.style.color="#a34d3f";
+
+  }
+}
+
+
+/* =====================================================
+   إكمال المحطات
+===================================================== */
+
+function completeStation(number){
+
+  if(number > completed){
+    completed = number;
+  }
+
+  if(number === 4){
+
+    updateJourney();
+
+    setTimeout(()=>{
+      showPage("finish");
+    },250);
+
+    return;
+  }
+
+  updateJourney();
+
+  showPage("journey");
+}
+
+
+/* =====================================================
+   تحديث المسار
+===================================================== */
+
+function updateJourney(){
+
+  const percent = completed * 25;
+
+  document.getElementById("progressBar")
+    .style.width = percent + "%";
+
+  const arabicPercent = {
+    0:"٠٪",
+    25:"٢٥٪",
+    50:"٥٠٪",
+    75:"٧٥٪",
+    100:"١٠٠٪"
+  };
+
+  document.getElementById("progressText")
+    .innerText = arabicPercent[percent];
+
+
+  for(let i=1;i<=4;i++){
+
+    const card =
+      document.getElementById("station"+i+"Card");
+
+    const status =
+      document.getElementById("status"+i);
+
+    card.classList.remove(
+      "locked",
+      "done",
+      "current"
+    );
+
+
+    if(i <= completed){
+
+      card.classList.add("done");
+
+      status.innerText="✓ مكتملة";
+
+      const lock =
+        document.getElementById("lock"+i);
+
+      if(lock) lock.style.display="none";
+
+    }
+
+    else if(i === completed+1){
+
+      card.classList.add("current");
+
+      status.innerText="ابدئي هنا";
+
+      const lock =
+        document.getElementById("lock"+i);
+
+      if(lock) lock.style.display="none";
+
+    }
+
+    else{
+
+      card.classList.add("locked");
+
+      status.innerText="مقفلة";
+
+      const lock =
+        document.getElementById("lock"+i);
+
+      if(lock) lock.style.display="block";
+
+    }
+
+  }
+}
+
+
+/* =====================================================
+   إعادة الرحلة
+===================================================== */
+
+function restartJourney(){
+
+  completed=0;
+
+  scenarioDone={
+    1:false,
+    2:false,
+    3:false
+  };
+
+  visitedPlaces.clear();
+
+
+  document.querySelectorAll(
+    ".answer,.choice"
+  ).forEach(el=>{
+
+    el.classList.remove(
+      "correct",
+      "wrong",
+      "good",
+      "bad"
+    );
+
+  });
+
+
+  document.querySelectorAll(".place")
+    .forEach(el=>{
+      el.classList.remove("visited");
+    });
+
+
+  document.getElementById("feedback1")
+    .innerHTML="";
+
+  document.getElementById("feedback2")
+    .innerHTML="";
+
+  document.getElementById("feedback4")
+    .innerHTML="";
+
+
+  document.getElementById("complete1")
+    .style.display="none";
+
+  document.getElementById("complete2")
+    .style.display="none";
+
+  document.getElementById("complete3")
+    .style.display="none";
+
+  document.getElementById("complete4")
+    .style.display="none";
+
+
+  document.getElementById("placeInfo")
+    .innerHTML=
+    "👆 اختاري إحدى الوجهات لبدء الجولة.";
+
+
+  document.getElementById("studentName")
+    .value="";
+
+
+  updateJourney();
+
+  showPage("home");
+}
+
+
+/* أول تشغيل */
+
+updateJourney();
 
 </script>
-
 
 </body>
 </html>
