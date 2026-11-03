@@ -1,1 +1,729 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
+  <title>رحلة وطن | الإبتدائية الخامسة والأربعون</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #004d3d;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       الواجهة الرئيسية
+    ========================== */
+
+    #home {
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+
+      position: relative;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+
+      background-image:
+        linear-gradient(
+          to bottom,
+          rgba(0, 50, 39, 0.05),
+          rgba(0, 50, 39, 0.12),
+          rgba(0, 42, 33, 0.62)
+        ),
+        url("watan-cover.jpg");
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      padding: 30px;
+    }
+
+    .home-content {
+      width: 100%;
+      max-width: 900px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      position: relative;
+      z-index: 2;
+    }
+
+    /* نخلي بيانات المدرسة في الأسفل
+       عشان ما نغطي جمال الصورة */
+
+    .school-info {
+      margin-top: 55vh;
+
+      padding: 14px 24px;
+
+      border: 1px solid rgba(255, 220, 140, 0.8);
+      border-radius: 22px;
+
+      background: rgba(0, 72, 54, 0.78);
+
+      color: white;
+
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      box-shadow: 0 8px 30px rgba(0,0,0,0.22);
+    }
+
+    .school-name {
+      font-size: 22px;
+      font-weight: bold;
+      color: #ffe09a;
+      margin-bottom: 8px;
+    }
+
+    .details {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+
+      gap: 7px 18px;
+
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    /* زر البداية */
+
+    .start-button {
+      margin-top: 18px;
+
+      border: none;
+      outline: none;
+
+      padding: 16px 42px;
+
+      border-radius: 50px;
+
+      font-size: 21px;
+      font-weight: bold;
+
+      color: #063f31;
+
+      background: linear-gradient(
+        135deg,
+        #ffe6a3,
+        #d7ad55
+      );
+
+      box-shadow:
+        0 10px 25px rgba(0,0,0,0.28),
+        0 0 20px rgba(255, 215, 120, 0.35);
+
+      cursor: pointer;
+
+      transition: 0.25s;
+    }
+
+    .start-button:active {
+      transform: scale(0.96);
+    }
+
+    /* السهم */
+
+    .arrow {
+      display: inline-block;
+      margin-right: 7px;
+
+      animation: moveArrow 1.3s infinite;
+    }
+
+    @keyframes moveArrow {
+      0%, 100% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(-6px);
+      }
+    }
+
+
+    /* =========================
+       صفحة مسار الرحلة
+    ========================== */
+
+    #journey {
+      display: none;
+
+      min-height: 100vh;
+      min-height: 100svh;
+
+      background:
+        radial-gradient(
+          circle at top,
+          #f9f4df,
+          #e7f0e9 55%,
+          #d4e5da
+        );
+
+      color: #064b3a;
+
+      padding:
+        max(30px, env(safe-area-inset-top))
+        30px
+        50px;
+    }
+
+    .journey-container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .back-button {
+      border: none;
+      background: transparent;
+
+      color: #075b45;
+
+      font-size: 17px;
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+    .journey-title {
+      text-align: center;
+
+      font-size: clamp(38px, 6vw, 65px);
+
+      margin-top: 30px;
+
+      color: #075b45;
+    }
+
+    .journey-subtitle {
+      text-align: center;
+
+      margin-top: 10px;
+
+      font-size: 19px;
+      color: #647970;
+    }
+
+    .progress-title {
+      margin-top: 35px;
+
+      text-align: center;
+
+      font-weight: bold;
+
+      color: #947027;
+    }
+
+    .progress {
+      width: 85%;
+      max-width: 700px;
+
+      height: 13px;
+
+      margin: 12px auto 40px;
+
+      border-radius: 20px;
+
+      background: #dce7df;
+
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 5%;
+      height: 100%;
+
+      border-radius: 20px;
+
+      background: linear-gradient(
+        to left,
+        #075b45,
+        #d7ad55
+      );
+    }
+
+
+    /* المحطات */
+
+    .stations {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 18px;
+
+      margin-top: 20px;
+    }
+
+    .station {
+      min-height: 230px;
+
+      padding: 25px 15px;
+
+      border-radius: 30px;
+
+      background: rgba(255,255,255,0.88);
+
+      border: 2px solid #d5e3da;
+
+      box-shadow:
+        0 15px 35px rgba(16, 66, 48, 0.12);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+
+      position: relative;
+
+      transition: 0.25s;
+    }
+
+    .station.active {
+      border: 3px solid #d7ad55;
+
+      background:
+        linear-gradient(
+          145deg,
+          #ffffff,
+          #fff7df
+        );
+
+      transform: translateY(-8px);
+
+      box-shadow:
+        0 18px 40px rgba(128, 92, 20, 0.18);
+    }
+
+    .station.locked {
+      opacity: 0.65;
+    }
+
+    .station-number {
+      width: 48px;
+      height: 48px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border-radius: 50%;
+
+      background: #075b45;
+      color: white;
+
+      font-size: 19px;
+      font-weight: bold;
+
+      margin-bottom: 12px;
+    }
+
+    .station-icon {
+      font-size: 40px;
+
+      margin-bottom: 10px;
+    }
+
+    .station h3 {
+      font-size: 21px;
+
+      margin-bottom: 8px;
+
+      color: #075b45;
+    }
+
+    .station p {
+      color: #63776f;
+
+      line-height: 1.7;
+
+      font-size: 15px;
+    }
+
+    .lock {
+      position: absolute;
+
+      top: 15px;
+      left: 15px;
+
+      font-size: 20px;
+    }
+
+    .enter-station {
+      margin-top: 35px;
+
+      text-align: center;
+    }
+
+    .enter-button {
+      border: none;
+
+      border-radius: 50px;
+
+      padding: 15px 35px;
+
+      font-size: 18px;
+      font-weight: bold;
+
+      background:
+        linear-gradient(
+          135deg,
+          #075b45,
+          #0a7559
+        );
+
+      color: white;
+
+      box-shadow:
+        0 10px 25px rgba(7, 91, 69, 0.25);
+
+      cursor: pointer;
+    }
+
+
+    /* =========================
+       Responsive للآيباد والجوال
+    ========================== */
+
+    @media (max-width: 900px) {
+
+      .stations {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      #home {
+        padding: 18px;
+      }
+
+      .school-info {
+        margin-top: 48vh;
+
+        width: 95%;
+      }
+
+      .school-name {
+        font-size: 18px;
+      }
+
+      .details {
+        font-size: 13px;
+      }
+
+      .start-button {
+        font-size: 18px;
+        padding: 14px 32px;
+      }
+
+      .stations {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     الواجهة الرئيسية
+================================== -->
+
+<section id="home">
+
+  <div class="home-content">
+
+    <div class="school-info">
+
+      <div class="school-name">
+        الإبتدائية الخامسة والأربعون
+      </div>
+
+      <div class="details">
+
+        <span>
+          المعلمة: دار الهناء الحربي
+        </span>
+
+        <span>
+          •
+        </span>
+
+        <span>
+          الصف: ٢/١
+        </span>
+
+        <span>
+          •
+        </span>
+
+        <span>
+          مديرة المدرسة: هبة فلمبان
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="start-button"
+      onclick="startJourney()"
+    >
+
+      ابدئي الرحلة
+
+      <span class="arrow">
+        ←
+      </span>
+
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- =================================
+     مسار الرحلة
+================================== -->
+
+<section id="journey">
+
+  <div class="journey-container">
+
+
+    <button
+      class="back-button"
+      onclick="goHome()"
+    >
+      → العودة للرئيسية
+    </button>
+
+
+    <h1 class="journey-title">
+      رحلة وطن 🇸🇦
+    </h1>
+
+
+    <p class="journey-subtitle">
+      أكملي المحطات الأربع
+      واجمعي شاراتك للوصول إلى
+      لقب سفيرة الوعي الوطني
+    </p>
+
+
+    <div class="progress-title">
+      تقدم رحلتك ٠٪
+    </div>
+
+
+    <div class="progress">
+
+      <div class="progress-bar">
+      </div>
+
+    </div>
+
+
+
+    <div class="stations">
+
+
+      <!-- المحطة الأولى -->
+
+      <div class="station active">
+
+        <div class="station-number">
+          ١
+        </div>
+
+        <div class="station-icon">
+          💡
+        </div>
+
+        <h3>
+          أعرف رؤيتي
+        </h3>
+
+        <p>
+          اكتشفي رؤية المملكة
+          2030 وطموحات وطننا.
+        </p>
+
+      </div>
+
+
+
+      <!-- المحطة الثانية -->
+
+      <div class="station locked">
+
+        <span class="lock">
+          🔒
+        </span>
+
+        <div class="station-number">
+          ٢
+        </div>
+
+        <div class="station-icon">
+          🤍
+        </div>
+
+        <h3>
+          مواطنة مسؤولة
+        </h3>
+
+        <p>
+          اختبري وعيك
+          واتخذي القرار الصحيح.
+        </p>
+
+      </div>
+
+
+
+      <!-- المحطة الثالثة -->
+
+      <div class="station locked">
+
+        <span class="lock">
+          🔒
+        </span>
+
+        <div class="station-number">
+          ٣
+        </div>
+
+        <div class="station-icon">
+          🗺️
+        </div>
+
+        <h3>
+          رحلة افتراضية في بلادي
+        </h3>
+
+        <p>
+          تجولي بين أجمل
+          مناطق ومعالم المملكة.
+        </p>
+
+      </div>
+
+
+
+      <!-- المحطة الرابعة -->
+
+      <div class="station locked">
+
+        <span class="lock">
+          🔒
+        </span>
+
+        <div class="station-number">
+          ٤
+        </div>
+
+        <div class="station-icon">
+          🌍
+        </div>
+
+        <h3>
+          المملكة وجهة العالم
+        </h3>
+
+        <p>
+          اكتشفي مكانة المملكة
+          وحضورها العالمي.
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+
+    <div class="enter-station">
+
+      <button class="enter-button">
+        ابدئي المحطة الأولى 💡
+      </button>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<script>
+
+  function startJourney() {
+
+    document.getElementById("home").style.display =
+      "none";
+
+    document.getElementById("journey").style.display =
+      "block";
+
+    window.scrollTo(0, 0);
+
+  }
+
+
+  function goHome() {
+
+    document.getElementById("journey").style.display =
+      "none";
+
+    document.getElementById("home").style.display =
+      "flex";
+
+    window.scrollTo(0, 0);
+
+  }
+
+</script>
+
+
+</body>
+</html>
