@@ -17,7 +17,11 @@
   --ink:#174d3d;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 html,body{
   width:100%;
@@ -27,8 +31,16 @@ html,body{
 }
 
 body{overflow-x:hidden}
-button{font-family:inherit}
-button,input{font-size:inherit}
+
+button,input{
+  font-family:inherit;
+  font-size:inherit;
+}
+
+button{
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
 
 .page{
   display:none;
@@ -38,9 +50,9 @@ button,input{font-size:inherit}
 
 .page.active{display:block}
 
-/* ======================================================
-   الصفحة الأولى - لا تغيير على الصورة
-====================================================== */
+/* =========================================================
+   الصفحة الأولى — لا تغيير على الصورة
+========================================================= */
 
 #home.active{
   display:flex;
@@ -53,6 +65,7 @@ button,input{font-size:inherit}
 .cover{
   position:relative;
   width:100vw;
+  max-width:none;
   aspect-ratio:1488/1024;
   overflow:hidden;
 }
@@ -74,51 +87,50 @@ button,input{font-size:inherit}
   width:27%;
   height:10%;
   z-index:9999;
-  border:0;
-  outline:0;
+  border:none;
+  outline:none;
   background:rgba(255,255,255,.001);
   border-radius:60px;
   cursor:pointer;
   touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
 }
 
-/* ======================================================
-   الخلفية العامة
-====================================================== */
+/* =========================================================
+   الخلفية
+========================================================= */
 
 .green-page{
   position:relative;
   overflow:hidden;
   color:white;
   background:
-    radial-gradient(circle at 50% 0%,#0a765d 0%,#045943 27%,#003e30 63%,#002b22 100%);
+    radial-gradient(circle at 50% -5%,#0c8064 0%,#075f4a 25%,#003f31 60%,#00281f 100%);
 }
 
 .green-page:before{
   content:"";
   position:absolute;
-  width:900px;
-  height:500px;
+  width:1000px;
+  height:600px;
   left:50%;
-  top:-350px;
+  top:-430px;
   transform:translateX(-50%);
   border-radius:50%;
-  background:rgba(255,218,116,.16);
-  filter:blur(55px);
+  background:rgba(255,218,116,.18);
+  filter:blur(60px);
   pointer-events:none;
 }
 
 .green-page:after{
   content:"";
   position:absolute;
-  width:120%;
-  height:170px;
   left:-10%;
-  bottom:-120px;
+  bottom:-140px;
+  width:120%;
+  height:220px;
   border-radius:50% 50% 0 0;
-  border-top:2px solid rgba(221,181,78,.35);
-  background:rgba(6,103,78,.45);
+  border-top:1px solid rgba(231,197,103,.38);
+  background:rgba(6,103,78,.35);
   pointer-events:none;
 }
 
@@ -127,12 +139,12 @@ button,input{font-size:inherit}
   z-index:3;
   width:min(94%,1450px);
   margin:auto;
-  padding:22px 0 45px;
+  padding:22px 0 50px;
 }
 
-/* ======================================================
-   Top bar
-====================================================== */
+/* =========================================================
+   TOP BAR
+========================================================= */
 
 .topbar{
   display:flex;
@@ -142,28 +154,28 @@ button,input{font-size:inherit}
 }
 
 .school{
-  color:#f5df9f;
+  color:#f6df9b;
   font-size:14px;
   font-weight:bold;
 }
 
 .back{
-  padding:9px 17px;
+  padding:9px 18px;
   border:1px solid rgba(239,205,114,.65);
   border-radius:30px;
-  background:rgba(0,45,34,.5);
+  background:rgba(0,45,34,.55);
   color:#f5df9f;
   font-weight:bold;
   cursor:pointer;
 }
 
-/* ======================================================
-   Header
-====================================================== */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .header{
   text-align:center;
-  margin:5px auto 17px;
+  margin:6px auto 18px;
 }
 
 .eyebrow{
@@ -173,18 +185,20 @@ button,input{font-size:inherit}
 }
 
 .header h1{
-  margin-top:4px;
+  margin-top:5px;
   font-size:clamp(34px,4.2vw,60px);
   line-height:1.25;
-  text-shadow:0 5px 20px rgba(0,0,0,.25);
+  text-shadow:0 6px 22px rgba(0,0,0,.3);
 }
 
 .gold-line{
-  width:170px;
+  width:180px;
   height:4px;
-  margin:8px auto 10px;
-  border-radius:10px;
-  background:linear-gradient(90deg,transparent,#f6dc8d,#b98526,#f6dc8d,transparent);
+  margin:9px auto 11px;
+  border-radius:20px;
+  background:
+    linear-gradient(90deg,transparent,#f6dc8d,#b98526,#f6dc8d,transparent);
+  box-shadow:0 0 15px rgba(246,220,141,.35);
 }
 
 .header p{
@@ -193,38 +207,42 @@ button,input{font-size:inherit}
   font-size:15px;
 }
 
-/* ======================================================
-   أزرار
-====================================================== */
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 .primary{
   border:2px solid #e9ca70;
   border-radius:50px;
-  padding:13px 29px;
+  padding:13px 30px;
   color:white;
-  background:linear-gradient(180deg,#0b8b67,#006148);
+  background:linear-gradient(180deg,#0b8b67,#005a43);
   font-weight:bold;
   cursor:pointer;
-  box-shadow:0 10px 25px rgba(0,0,0,.24);
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.24),
+    inset 0 1px rgba(255,255,255,.18);
 }
 
-.primary:active{transform:scale(.97)}
+.primary:active{
+  transform:scale(.97);
+}
 
 .actions{
-  margin-top:20px;
+  margin-top:22px;
   display:flex;
   justify-content:center;
   gap:12px;
   flex-wrap:wrap;
 }
 
-/* ======================================================
-   Progress
-====================================================== */
+/* =========================================================
+   PROGRESS
+========================================================= */
 
 .progress-wrap{
-  width:min(680px,70%);
-  margin:12px auto 24px;
+  width:min(680px,72%);
+  margin:12px auto 26px;
 }
 
 .progress-info{
@@ -237,39 +255,76 @@ button,input{font-size:inherit}
 }
 
 .progress{
-  height:10px;
+  height:11px;
   padding:1px;
   border:1px solid rgba(255,255,255,.15);
   border-radius:30px;
-  background:rgba(255,255,255,.12);
+  background:rgba(255,255,255,.11);
   overflow:hidden;
 }
 
 .progress-bar{
-  width:0%;
+  width:0;
   height:100%;
   border-radius:30px;
-  background:linear-gradient(90deg,#ba8120,#ffe49a);
-  box-shadow:0 0 16px rgba(255,221,128,.8);
+  background:linear-gradient(90deg,#a9741e,#ffe59a);
+  box-shadow:0 0 18px rgba(255,221,128,.8);
   transition:.6s;
 }
 
-/* ======================================================
+/* =========================================================
    مسار الرحلة
-====================================================== */
+========================================================= */
 
 .route-wrap{
   position:relative;
-  margin-top:5px;
+  margin-top:10px;
+  padding-top:35px;
 }
 
-.route-line{
+.luxury-route{
   position:absolute;
   z-index:0;
-  top:49%;
-  left:7%;
-  width:86%;
-  border-top:3px dashed rgba(236,203,113,.48);
+  left:1%;
+  right:1%;
+  top:0;
+  height:260px;
+  pointer-events:none;
+  opacity:.95;
+}
+
+.luxury-route svg{
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+
+.route-shadow{
+  fill:none;
+  stroke:rgba(0,0,0,.30);
+  stroke-width:14;
+  stroke-linecap:round;
+}
+
+.route-gold{
+  fill:none;
+  stroke:url(#routeGold);
+  stroke-width:5;
+  stroke-linecap:round;
+  stroke-dasharray:5 14;
+  filter:url(#routeGlow);
+  animation:routeMove 10s linear infinite;
+}
+
+.luxury-route circle{
+  fill:#ffe59a;
+  stroke:#8d6118;
+  stroke-width:3;
+  filter:url(#routeGlow);
+}
+
+@keyframes routeMove{
+  to{stroke-dashoffset:-190}
 }
 
 .stations{
@@ -282,32 +337,46 @@ button,input{font-size:inherit}
 
 .station{
   position:relative;
-  min-height:285px;
+  min-height:310px;
   overflow:hidden;
-  padding:18px;
+  padding:19px;
   text-align:center;
   border:2px solid rgba(226,188,89,.72);
-  border-radius:29px;
+  border-radius:30px;
   cursor:pointer;
   background:
+    radial-gradient(circle at 50% 0%,rgba(255,225,136,.10),transparent 38%),
     linear-gradient(
       180deg,
       rgba(8,104,79,.98) 0%,
-      rgba(4,74,56,.98) 61%,
-      #f8efd4 61%,
+      rgba(3,66,51,.99) 63%,
+      #f6ecd0 63%,
       #fffaf0 100%
     );
-  box-shadow:0 17px 35px rgba(0,0,0,.25);
-  transition:.25s;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.27),
+    inset 0 1px rgba(255,255,255,.12);
+  transition:.28s;
+}
+
+.station:before{
+  content:"";
+  position:absolute;
+  width:160px;
+  height:160px;
+  left:-90px;
+  top:-90px;
+  border-radius:50%;
+  background:rgba(235,198,99,.09);
 }
 
 .station.current{
-  transform:translateY(-7px);
+  transform:translateY(-9px);
   border:3px solid #f3d477;
   box-shadow:
-    0 0 0 4px rgba(244,211,118,.08),
-    0 0 30px rgba(244,211,118,.27),
-    0 20px 35px rgba(0,0,0,.28);
+    0 0 0 4px rgba(244,211,118,.07),
+    0 0 32px rgba(244,211,118,.27),
+    0 22px 40px rgba(0,0,0,.3);
 }
 
 .station.done{
@@ -315,35 +384,36 @@ button,input{font-size:inherit}
 }
 
 .station.locked{
-  opacity:.64;
+  opacity:.62;
   filter:saturate(.55);
   cursor:not-allowed;
 }
 
 .station-num{
   position:absolute;
-  right:13px;
-  top:13px;
+  right:14px;
+  top:14px;
   padding:7px 14px;
   border-radius:20px;
   color:#064a38;
   font-weight:bold;
-  background:linear-gradient(135deg,#bd8724,#f3d679);
+  background:linear-gradient(135deg,#b97f1d,#f5d87e);
+  box-shadow:0 5px 12px rgba(0,0,0,.15);
 }
 
 .lock{
   position:absolute;
   left:16px;
-  top:17px;
+  top:18px;
 }
 
 .station-icon{
-  margin:32px 0 12px;
-  font-size:51px;
+  margin:37px 0 13px;
+  font-size:53px;
 }
 
 .station h3{
-  min-height:64px;
+  min-height:65px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -353,53 +423,53 @@ button,input{font-size:inherit}
 }
 
 .station p{
-  padding-top:17px;
+  padding-top:20px;
   color:#41645a;
   font-size:13px;
-  line-height:1.65;
+  line-height:1.7;
 }
 
 .status{
   display:inline-block;
-  margin-top:8px;
-  padding:5px 13px;
+  margin-top:9px;
+  padding:6px 14px;
   border-radius:20px;
   color:#064536;
-  background:#d7ad55;
+  background:linear-gradient(135deg,#c5902e,#eed174);
   font-size:11px;
   font-weight:bold;
 }
 
 .route-bottom{
-  margin-top:23px;
+  margin-top:25px;
   text-align:center;
   color:#e3c978;
   font-size:13px;
 }
 
-/* ======================================================
-   Activity card
-====================================================== */
+/* =========================================================
+   ACTIVITY CARD
+========================================================= */
 
 .station-page .shell{
-  width:min(93%,1180px);
+  width:min(94%,1250px);
 }
 
 .activity-card{
-  max-width:1050px;
+  max-width:1120px;
   margin:15px auto;
-  padding:28px;
+  padding:30px;
   border:2px solid var(--gold);
-  border-radius:30px;
-  background:rgba(255,250,237,.98);
+  border-radius:32px;
+  background:rgba(255,250,237,.985);
   color:var(--ink);
-  box-shadow:0 20px 55px rgba(0,0,0,.24);
+  box-shadow:0 22px 60px rgba(0,0,0,.27);
 }
 
 .activity-card h2{
   margin-bottom:12px;
   color:var(--green);
-  font-size:25px;
+  font-size:26px;
 }
 
 .activity-card>p{
@@ -407,9 +477,9 @@ button,input{font-size:inherit}
   line-height:1.9;
 }
 
-/* ======================================================
-   المحطة الأولى
-====================================================== */
+/* =========================================================
+   VISION 2030
+========================================================= */
 
 .vision-intro{
   margin-top:20px;
@@ -424,20 +494,35 @@ button,input{font-size:inherit}
 .vision-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:14px;
+  gap:15px;
   margin-top:18px;
 }
 
 .vision-card{
   position:relative;
-  min-height:180px;
-  padding:20px 14px;
-  border:1px solid #d8e2d9;
-  border-radius:22px;
+  min-height:190px;
+  overflow:hidden;
+  padding:22px 15px;
+  border:1px solid rgba(8,100,75,.16);
+  border-radius:23px;
   background:#f3f7f2;
   text-align:center;
   cursor:pointer;
-  transition:.25s;
+  transition:.3s;
+  box-shadow:0 12px 28px rgba(0,72,54,.08);
+  touch-action:manipulation;
+}
+
+.vision-card:after{
+  content:"";
+  position:absolute;
+  width:130px;
+  height:130px;
+  right:-75px;
+  top:-75px;
+  border-radius:50%;
+  background:rgba(215,173,85,.15);
+  transition:.4s;
 }
 
 .vision-card:active{
@@ -445,20 +530,27 @@ button,input{font-size:inherit}
 }
 
 .vision-card.opened{
-  border-color:#d3aa4e;
+  transform:translateY(-6px);
+  border:2px solid #d3aa4e;
   background:#fff8e4;
-  box-shadow:0 8px 20px rgba(113,84,23,.10);
+  box-shadow:0 18px 30px rgba(113,84,23,.15);
+}
+
+.vision-card.opened:after{
+  width:210px;
+  height:210px;
 }
 
 .vision-icon{
-  font-size:42px;
-  margin-bottom:9px;
+  font-size:44px;
+  margin-bottom:10px;
 }
 
 .vision-card strong{
   display:block;
   color:#075b45;
   margin-bottom:8px;
+  font-size:18px;
 }
 
 .vision-card span{
@@ -468,20 +560,80 @@ button,input{font-size:inherit}
 }
 
 .tap-note{
-  margin-top:7px;
-  color:#aa812d;
+  margin-top:9px;
+  color:#a97f27;
   font-size:11px;
+  font-weight:bold;
 }
 
-/* ======================================================
-   Question
-====================================================== */
+.vision-discovery{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:20px;
+  align-items:center;
+  margin-top:19px;
+  padding:23px;
+  border-radius:26px;
+  color:white;
+  background:
+    radial-gradient(circle at 10% 20%,rgba(255,220,120,.17),transparent 30%),
+    linear-gradient(135deg,#087157,#003e30);
+  border:2px solid #d7ad55;
+  box-shadow:0 15px 30px rgba(0,0,0,.17);
+}
+
+.discovery-number{
+  width:100px;
+  height:100px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #efd17a;
+  border-radius:50%;
+  color:#ffe8a2;
+  font-size:25px;
+  font-weight:bold;
+  box-shadow:
+    inset 0 0 25px rgba(255,219,119,.08),
+    0 0 25px rgba(255,219,119,.15);
+}
+
+.vision-discovery small{
+  color:#e6ca75;
+}
+
+.vision-discovery h3{
+  margin:4px 0 8px;
+  color:#fff4d2;
+  font-size:22px;
+}
+
+.vision-discovery p{
+  color:#e7f1ed;
+  line-height:1.8;
+}
+
+.vision-you{
+  display:none;
+  margin-top:11px;
+  padding:11px 14px;
+  border-right:3px solid #e7c96e;
+  border-radius:10px;
+  background:rgba(255,255,255,.08);
+  color:#ffe7a0;
+  line-height:1.7;
+}
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
 
 .question{
-  margin-top:22px;
-  padding:20px;
-  border-radius:22px;
+  margin-top:23px;
+  padding:21px;
+  border-radius:23px;
   background:#eef5ef;
+  border:1px solid #dbe6de;
 }
 
 .question h3{
@@ -497,13 +649,18 @@ button,input{font-size:inherit}
 
 .answer{
   width:100%;
-  padding:13px 15px;
+  padding:14px 16px;
   border:1px solid #cadbd0;
-  border-radius:15px;
+  border-radius:16px;
   background:white;
   color:#174c3d;
   text-align:right;
   cursor:pointer;
+  transition:.2s;
+}
+
+.answer:active{
+  transform:scale(.99);
 }
 
 .answer.correct{
@@ -518,36 +675,38 @@ button,input{font-size:inherit}
 
 .feedback{
   min-height:28px;
-  margin-top:11px;
+  margin-top:12px;
   font-weight:bold;
   font-size:14px;
 }
 
-/* ======================================================
-   المحطة الثانية - مواقف أفخم
-====================================================== */
+/* =========================================================
+   المواطنة
+========================================================= */
 
 .scenarios{
   display:grid;
-  gap:16px;
+  gap:17px;
   margin-top:20px;
 }
 
 .scenario{
   position:relative;
   overflow:hidden;
-  padding:20px;
+  padding:21px;
   border:1px solid #d7e2da;
-  border-radius:23px;
-  background:linear-gradient(135deg,#f5f8f4,#edf4ef);
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 100% 0,rgba(214,177,78,.13),transparent 30%),
+    linear-gradient(135deg,#f6f9f5,#edf4ef);
 }
 
 .scenario-number{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:37px;
-  height:37px;
+  width:39px;
+  height:39px;
   margin-left:8px;
   border-radius:50%;
   color:#fff8dc;
@@ -567,14 +726,14 @@ button,input{font-size:inherit}
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:11px;
-  margin-top:15px;
+  margin-top:16px;
 }
 
 .choice{
-  min-height:58px;
-  padding:12px 14px;
+  min-height:63px;
+  padding:13px 15px;
   border:1px solid #cbdad0;
-  border-radius:17px;
+  border-radius:18px;
   color:#174c3d;
   background:white;
   cursor:pointer;
@@ -583,7 +742,9 @@ button,input{font-size:inherit}
   transition:.2s;
 }
 
-.choice:active{transform:scale(.98)}
+.choice:active{
+  transform:scale(.98);
+}
 
 .choice.good{
   border:2px solid #4c9a69;
@@ -596,212 +757,305 @@ button,input{font-size:inherit}
   background:#f9e5e1;
 }
 
-/* ======================================================
-   الخريطة
-====================================================== */
+/* =========================================================
+   MAP
+========================================================= */
 
 .map-intro{
-  margin:15px 0 18px;
+  margin:16px 0 19px;
+  padding:11px;
+  border-radius:16px;
   text-align:center;
   color:#6d5b2e;
+  background:#fff8e4;
+  border:1px solid #e7d39c;
   font-size:13px;
 }
 
 .map-layout{
   display:grid;
-  grid-template-columns:1.65fr .8fr;
+  grid-template-columns:1.75fr .8fr;
   gap:20px;
   align-items:stretch;
 }
 
 .saudi-map{
   position:relative;
-  min-height:550px;
+  min-height:650px;
   overflow:hidden;
   border:2px solid #d4ad53;
-  border-radius:30px;
+  border-radius:31px;
   background:
-    radial-gradient(circle at 50% 40%,#f8f2dd,#eee3bf);
+    radial-gradient(circle at 50% 42%,#fffaf0,#eadfb9);
+  box-shadow:
+    inset 0 0 45px rgba(139,102,32,.10),
+    0 14px 30px rgba(0,0,0,.12);
 }
 
-/* شكل المملكة تقريبي بصريًا */
+.saudi-map:before{
+  content:"المملكة العربية السعودية";
+  position:absolute;
+  z-index:2;
+  left:50%;
+  bottom:16px;
+  transform:translateX(-50%);
+  color:rgba(73,94,72,.32);
+  font-weight:bold;
+  letter-spacing:2px;
+}
+
+/* شكل المملكة البصري */
 .map-shape{
   position:absolute;
-  left:10%;
-  top:7%;
-  width:80%;
-  height:84%;
+  left:8%;
+  top:6%;
+  width:84%;
+  height:87%;
   background:
-    linear-gradient(145deg,#0b7b5d,#00523e);
+    radial-gradient(circle at 50% 40%,rgba(255,255,255,.07),transparent 35%),
+    linear-gradient(145deg,#0b7b5d,#00513e 60%,#003c2f);
   clip-path:polygon(
-    20% 10%,
-    43% 5%,
-    58% 12%,
-    76% 10%,
-    88% 24%,
-    91% 42%,
-    82% 52%,
-    88% 66%,
-    74% 82%,
-    52% 91%,
-    35% 84%,
-    18% 72%,
-    10% 55%,
-    13% 38%,
-    6% 26%
+    19% 9%,
+    39% 4%,
+    54% 9%,
+    67% 7%,
+    79% 14%,
+    89% 26%,
+    93% 43%,
+    86% 53%,
+    90% 65%,
+    80% 76%,
+    68% 84%,
+    53% 91%,
+    37% 87%,
+    25% 79%,
+    15% 72%,
+    9% 59%,
+    12% 45%,
+    7% 30%
   );
-  filter:drop-shadow(0 18px 16px rgba(0,0,0,.18));
+  filter:drop-shadow(0 19px 18px rgba(0,0,0,.2));
 }
 
-.map-shape:after{
+.map-shape:before{
   content:"";
   position:absolute;
-  inset:7px;
+  inset:4px;
   clip-path:inherit;
   border:1px solid rgba(255,225,139,.4);
+  background:
+    repeating-linear-gradient(
+      30deg,
+      transparent 0,
+      transparent 24px,
+      rgba(255,255,255,.025) 25px,
+      rgba(255,255,255,.025) 26px
+    );
 }
 
 .city{
   position:absolute;
-  z-index:5;
+  z-index:6;
   transform:translate(-50%,-50%);
   white-space:nowrap;
-  color:#f8e5aa;
-  font-size:11px;
-  font-weight:bold;
-  text-shadow:0 2px 3px rgba(0,0,0,.75);
-  pointer-events:none;
-}
-
-.city.interactive{
-  pointer-events:auto;
-  cursor:pointer;
-  padding:5px 8px 5px 22px;
-  border:1px solid rgba(247,216,126,.55);
+  padding:5px 8px 5px 19px;
+  border:1px solid rgba(247,216,126,.42);
   border-radius:20px;
-  background:rgba(0,54,41,.76);
+  color:#fff1bc;
+  background:rgba(0,55,42,.79);
+  font-size:10px;
+  font-weight:bold;
+  text-shadow:0 2px 3px rgba(0,0,0,.7);
+  cursor:pointer;
+  pointer-events:auto;
+  touch-action:manipulation;
+  transition:.2s;
+  box-shadow:0 3px 7px rgba(0,0,0,.13);
 }
 
-.city.interactive:before{
+.city:before{
   content:"";
   position:absolute;
-  left:7px;
+  left:6px;
   top:50%;
-  width:9px;
-  height:9px;
+  width:7px;
+  height:7px;
   transform:translateY(-50%);
   border-radius:50%;
-  background:#f4cf69;
-  box-shadow:0 0 11px #ffd972;
+  background:#f3cf6c;
+  box-shadow:0 0 8px rgba(255,218,110,.9);
 }
 
-.city.interactive.visited{
-  color:#083f31;
-  background:#f1d57d;
+.city:active{
+  transform:translate(-50%,-50%) scale(.93);
+}
+
+.city.visited{
+  color:#073e30;
+  background:linear-gradient(135deg,#ffe69a,#d3a443);
+  border-color:#fff1b8;
   text-shadow:none;
+  box-shadow:0 0 17px rgba(234,195,91,.7);
 }
 
-.city.interactive.visited:before{
-  background:#0a7558;
-  box-shadow:0 0 10px #fff;
+.city.visited:before{
+  background:#075d48;
 }
 
-/*
-  مواقع تقريبية للعرض التعليمي
-*/
+/* مواقع المدن */
+.arar{left:44%;top:13%}
+.sakaka{left:32%;top:17%}
+.tabuk{left:19%;top:23%}
+.alula{left:25%;top:31%}
+.madinah{left:28%;top:42%}
+.yanbu{left:20%;top:47%}
+.hail{left:40%;top:31%}
+.buraidah{left:48%;top:40%}
+.hafar{left:68%;top:26%}
 
-.riyadh{left:56%;top:48%}
-.makkah{left:27%;top:58%}
-.jeddah{left:21%;top:55%}
-.madinah{left:26%;top:39%}
-.taif{left:31%;top:56%}
-.tabuk{left:20%;top:20%}
-.alula{left:25%;top:29%}
-.hail{left:40%;top:29%}
-.buraidah{left:47%;top:38%}
-.dammam{left:77%;top:42%}
-.khobar{left:79%;top:46%}
-.jubail{left:78%;top:35%}
-.ahsa{left:73%;top:51%}
-.abha{left:39%;top:76%}
-.khamis{left:42%;top:73%}
-.jazan{left:32%;top:84%}
-.najran{left:52%;top:80%}
-.baha{left:32%;top:67%}
-.sakaka{left:32%;top:16%}
-.arar{left:43%;top:13%}
-.yanbu{left:20%;top:43%}
-.diriyah{left:52%;top:44%}
-.hafar{left:68%;top:25%}
+.riyadh{left:58%;top:51%}
+.diriyah{left:52%;top:47%}
+
+.jubail{left:78%;top:36%}
+.dammam{left:80%;top:44%}
+.khobar{left:81%;top:49%}
+.ahsa{left:74%;top:55%}
+
+.jeddah{left:21%;top:59%}
+.makkah{left:28%;top:62%}
+.taif{left:34%;top:59%}
+
+.baha{left:34%;top:69%}
+.abha{left:40%;top:78%}
+.khamis{left:45%;top:75%}
+.jazan{left:31%;top:87%}
+.najran{left:56%;top:82%}
+
+/* صندوق معلومات المدينة */
 
 .map-panel{
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:22px;
-  border-radius:27px;
+  padding:24px;
+  border-radius:28px;
   color:#fff7dc;
-  background:linear-gradient(160deg,#076b52,#003f30);
+  background:
+    radial-gradient(circle at 100% 0,rgba(255,218,111,.13),transparent 35%),
+    linear-gradient(160deg,#076b52,#003c2e);
   border:2px solid #d5ad51;
+  box-shadow:0 16px 35px rgba(0,0,0,.17);
+}
+
+.map-kicker{
+  color:#e8c76b;
+  font-size:12px;
+  letter-spacing:1px;
+  margin-bottom:8px;
 }
 
 .map-panel .pin{
-  font-size:46px;
-  margin-bottom:10px;
+  font-size:48px;
+  margin-bottom:8px;
 }
 
 .map-panel h3{
   color:#f3d578;
-  margin-bottom:10px;
+  margin-bottom:8px;
+  font-size:24px;
 }
 
-.map-panel p{
+.city-region{
+  display:inline-block;
+  align-self:flex-start;
+  margin-bottom:15px;
+  padding:6px 12px;
+  border-radius:20px;
+  color:#ffe9a6;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(237,207,123,.3);
+  font-size:12px;
+}
+
+.culture-block{
+  margin-top:10px;
+  padding:14px;
+  border-radius:17px;
+  background:rgba(255,255,255,.07);
+}
+
+.culture-block small{
+  color:#e7c66d;
+  font-weight:bold;
+}
+
+.culture-block p{
+  margin-top:5px;
   color:#e6eee9;
   line-height:1.8;
-  font-size:14px;
+  font-size:13px;
+}
+
+.gold-block{
+  border:1px solid rgba(230,195,100,.28);
+  background:rgba(221,173,72,.09);
 }
 
 .visited-count{
-  margin-top:20px;
-  padding:11px;
+  margin-top:18px;
+  padding:12px;
   text-align:center;
   border-radius:16px;
   color:#ffe8a3;
   background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,231,163,.15);
+  font-size:12px;
 }
 
-/* ======================================================
-   المحطة الرابعة
-====================================================== */
+/* =========================================================
+   المملكة وجهة العالم
+========================================================= */
 
 .world-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:14px;
+  gap:15px;
   margin-top:20px;
 }
 
 .world-card{
   position:relative;
-  min-height:185px;
-  padding:20px 15px;
+  min-height:195px;
+  padding:21px 16px;
   overflow:hidden;
   border:1px solid #d7e1d9;
-  border-radius:22px;
+  border-radius:23px;
   text-align:center;
   background:#f3f7f2;
   cursor:pointer;
-  transition:.2s;
+  transition:.25s;
+}
+
+.world-card:after{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:120px;
+  right:-70px;
+  top:-70px;
+  border-radius:50%;
+  background:rgba(215,173,85,.14);
 }
 
 .world-card.opened{
-  border-color:#d2a74a;
+  border:2px solid #d2a74a;
   background:#fff8e5;
-  transform:translateY(-3px);
+  transform:translateY(-4px);
+  box-shadow:0 12px 25px rgba(102,76,20,.12);
 }
 
 .world-icon{
-  font-size:42px;
+  font-size:44px;
   margin-bottom:10px;
 }
 
@@ -809,24 +1063,29 @@ button,input{font-size:inherit}
   display:block;
   margin-bottom:8px;
   color:#075b45;
+  font-size:17px;
 }
 
 .world-card span{
   color:#667a71;
   font-size:13px;
-  line-height:1.65;
+  line-height:1.7;
 }
 
 .world-counter{
-  margin-top:15px;
+  margin-top:16px;
+  padding:12px;
+  border-radius:15px;
   text-align:center;
-  color:#9c7628;
+  color:#8b6924;
+  background:#fff7df;
+  border:1px solid #ead69c;
   font-weight:bold;
 }
 
-/* ======================================================
-   النهاية
-====================================================== */
+/* =========================================================
+   FINISH
+========================================================= */
 
 #finish.active{
   display:flex;
@@ -839,17 +1098,19 @@ button,input{font-size:inherit}
 .finish-card{
   position:relative;
   z-index:4;
-  width:min(90%,800px);
-  padding:43px 30px;
+  width:min(90%,820px);
+  padding:45px 31px;
   border:3px solid #e3c05f;
-  border-radius:38px;
-  background:rgba(255,249,232,.98);
+  border-radius:39px;
+  background:rgba(255,249,232,.99);
   color:var(--green);
-  box-shadow:0 25px 65px rgba(0,0,0,.32);
+  box-shadow:
+    0 25px 65px rgba(0,0,0,.32),
+    0 0 45px rgba(225,190,92,.14);
 }
 
 .medal{
-  font-size:78px;
+  font-size:80px;
 }
 
 .finish-card h1{
@@ -884,46 +1145,108 @@ button,input{font-size:inherit}
 
 .student-name{
   width:min(90%,450px);
-  margin:10px 0 18px;
-  padding:13px;
+  margin:13px 0 19px;
+  padding:14px;
   border:1px solid #cfb66d;
   border-radius:15px;
   text-align:center;
 }
 
-/* ======================================================
-   Responsive
-====================================================== */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-@media(max-width:950px){
-  .stations{grid-template-columns:repeat(2,1fr)}
-  .route-line{display:none}
-  .map-layout{grid-template-columns:1fr}
-  .world-grid{grid-template-columns:1fr}
-  .progress-wrap{width:85%}
+@media(max-width:1000px){
+
+  .stations{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .luxury-route{
+    display:none;
+  }
+
+  .map-layout{
+    grid-template-columns:1fr;
+  }
+
+  .world-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .progress-wrap{
+    width:85%;
+  }
+
 }
 
 @media(max-width:700px){
-  .vision-grid{grid-template-columns:1fr}
-  .choice-row{grid-template-columns:1fr}
-  .saudi-map{min-height:500px}
+
+  .vision-grid{
+    grid-template-columns:1fr;
+  }
+
+  .vision-discovery{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .discovery-number{
+    margin:auto;
+  }
+
+  .choice-row{
+    grid-template-columns:1fr;
+  }
+
+  .saudi-map{
+    min-height:600px;
+  }
+
+  .world-grid{
+    grid-template-columns:1fr;
+  }
+
 }
 
 @media(max-width:560px){
-  .stations{grid-template-columns:1fr}
-  .school{display:none}
-  .activity-card{padding:20px 14px}
-  .saudi-map{min-height:480px}
-  .city{font-size:9px}
+
+  .stations{
+    grid-template-columns:1fr;
+  }
+
+  .school{
+    display:none;
+  }
+
+  .activity-card{
+    padding:20px 14px;
+  }
+
+  .saudi-map{
+    min-height:560px;
+  }
+
+  .city{
+    font-size:8px;
+    padding:4px 6px 4px 15px;
+  }
+
+  .city:before{
+    left:5px;
+    width:5px;
+    height:5px;
+  }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- ======================================================
+<!-- =========================================================
      الصفحة الرئيسية
-====================================================== -->
+========================================================= -->
 
 <section id="home" class="page active">
 
@@ -933,6 +1256,7 @@ button,input{font-size:inherit}
 
     <button
       class="start-hotspot"
+      type="button"
       onclick="showPage('journey')"
       aria-label="ابدئي الرحلة">
     </button>
@@ -941,30 +1265,39 @@ button,input{font-size:inherit}
 
 </section>
 
-<!-- ======================================================
+<!-- =========================================================
      مسار الرحلة
-====================================================== -->
+========================================================= -->
 
 <section id="journey" class="page green-page">
 
 <div class="shell">
 
   <div class="topbar">
-    <div class="school">الإبتدائية الخامسة والأربعون 🇸🇦</div>
-    <button class="back" onclick="showPage('home')">العودة للرئيسية ↩</button>
+
+    <div class="school">
+      الإبتدائية الخامسة والأربعون 🇸🇦
+    </div>
+
+    <button class="back" onclick="showPage('home')">
+      العودة للرئيسية ↩
+    </button>
+
   </div>
 
   <div class="header">
 
-    <div class="eyebrow">✦ نحو رؤية المملكة 2030 ✦</div>
+    <div class="eyebrow">
+      ✦ برامج الوعي الفكري • نحو رؤية المملكة 2030 ✦
+    </div>
 
     <h1>مسار رحلة وطن</h1>
 
     <div class="gold-line"></div>
 
     <p>
-      أربع محطات تفاعلية...
-      في كل محطة اكتشاف جديد يقربنا أكثر من وطننا ورؤيته وطموحه.
+      أربع محطات، أربع تجارب، وهدف واحد:
+      أن نعرف وطننا أكثر ونكون جزءًا من مستقبله.
     </p>
 
   </div>
@@ -984,43 +1317,148 @@ button,input{font-size:inherit}
 
   <div class="route-wrap">
 
-    <div class="route-line"></div>
+    <!-- المسار الذهبي الجديد -->
+
+    <div class="luxury-route" aria-hidden="true">
+
+      <svg viewBox="0 0 1200 270" preserveAspectRatio="none">
+
+        <defs>
+
+          <linearGradient id="routeGold" x1="0" x2="1">
+            <stop offset="0%" stop-color="#9f6d16"/>
+            <stop offset="25%" stop-color="#f7df91"/>
+            <stop offset="55%" stop-color="#c9942d"/>
+            <stop offset="80%" stop-color="#ffe9a6"/>
+            <stop offset="100%" stop-color="#9f6d16"/>
+          </linearGradient>
+
+          <filter id="routeGlow">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+
+        </defs>
+
+        <path
+          class="route-shadow"
+          d="M55 170
+             C160 50 255 55 335 145
+             S510 245 600 145
+             S790 35 865 145
+             S1040 250 1145 115"/>
+
+        <path
+          class="route-gold"
+          d="M55 170
+             C160 50 255 55 335 145
+             S510 245 600 145
+             S790 35 865 145
+             S1040 250 1145 115"/>
+
+        <circle cx="55" cy="170" r="9"/>
+        <circle cx="335" cy="145" r="9"/>
+        <circle cx="600" cy="145" r="9"/>
+        <circle cx="865" cy="145" r="9"/>
+        <circle cx="1145" cy="115" r="9"/>
+
+      </svg>
+
+    </div>
 
     <div class="stations">
 
-      <div id="station1Card" class="station current" onclick="openStation(1)">
+      <div
+        id="station1Card"
+        class="station current"
+        onclick="openStation(1)">
+
         <div class="station-num">01</div>
+
         <div class="station-icon">💡</div>
+
         <h3>تعريف برؤية 2030</h3>
-        <p>اكتشفي محاور الرؤية وطموحات المملكة نحو المستقبل.</p>
-        <span class="status" id="status1">ابدئي هنا</span>
+
+        <p>
+          اكتشفي المحاور الثلاثة، وما الذي تعنيه الرؤية لكِ ولمستقبل وطنك.
+        </p>
+
+        <span class="status" id="status1">
+          ابدئي هنا
+        </span>
+
       </div>
 
-      <div id="station2Card" class="station locked" onclick="openStation(2)">
+      <div
+        id="station2Card"
+        class="station locked"
+        onclick="openStation(2)">
+
         <div class="station-num">02</div>
+
         <span class="lock" id="lock2">🔒</span>
+
         <div class="station-icon">🌱</div>
+
         <h3>أكون مواطنة مسؤولة</h3>
-        <p>مواقف واختيارات تكشف كيف نصنع الفرق في وطننا.</p>
-        <span class="status" id="status2">مقفلة</span>
+
+        <p>
+          مواقف يومية واختيارات تكشف كيف تبدأ المواطنة من تصرفاتنا.
+        </p>
+
+        <span class="status" id="status2">
+          مقفلة
+        </span>
+
       </div>
 
-      <div id="station3Card" class="station locked" onclick="openStation(3)">
+      <div
+        id="station3Card"
+        class="station locked"
+        onclick="openStation(3)">
+
         <div class="station-num">03</div>
+
         <span class="lock" id="lock3">🔒</span>
+
         <div class="station-icon">🗺️</div>
+
         <h3>رحلة افتراضية في بلادي</h3>
-        <p>استكشفي خريطة المملكة ومدنها ووجهاتها المميزة.</p>
-        <span class="status" id="status3">مقفلة</span>
+
+        <p>
+          تجولي بين مدن المملكة واكتشفي تنوعها وثقافتها وتراثها.
+        </p>
+
+        <span class="status" id="status3">
+          مقفلة
+        </span>
+
       </div>
 
-      <div id="station4Card" class="station locked" onclick="openStation(4)">
+      <div
+        id="station4Card"
+        class="station locked"
+        onclick="openStation(4)">
+
         <div class="station-num">04</div>
+
         <span class="lock" id="lock4">🔒</span>
+
         <div class="station-icon">🌍</div>
+
         <h3>المملكة وجهة العالم</h3>
-        <p>اكتشفي حضور المملكة وطموحها ومكانتها عالميًا.</p>
-        <span class="status" id="status4">مقفلة</span>
+
+        <p>
+          من السياحة والثقافة إلى الرياضة والابتكار والأحداث العالمية.
+        </p>
+
+        <span class="status" id="status4">
+          مقفلة
+        </span>
+
       </div>
 
     </div>
@@ -1028,78 +1466,191 @@ button,input{font-size:inherit}
   </div>
 
   <div class="route-bottom">
-    كل محطة تقرّبك خطوة نحو إكمال رحلة وطن 🇸🇦
+    ✦ كل محطة تقرّبك خطوة جديدة نحو إكمال رحلة وطن ✦
   </div>
 
 </div>
+
 </section>
 
-<!-- ======================================================
-     المحطة 01
-====================================================== -->
+<!-- =========================================================
+     المحطة الأولى
+========================================================= -->
 
 <section id="station1" class="page green-page station-page">
 
 <div class="shell">
 
   <div class="topbar">
-    <div class="school">المحطة 01 • البداية</div>
-    <button class="back" onclick="showPage('journey')">العودة للمسار ↩</button>
+
+    <div class="school">
+      المحطة 01 • رؤية وطن
+    </div>
+
+    <button class="back" onclick="showPage('journey')">
+      العودة للمسار ↩
+    </button>
+
   </div>
 
   <div class="header">
-    <div class="eyebrow">المحطة الأولى</div>
+
+    <div class="eyebrow">
+      المحطة الأولى
+    </div>
+
     <h1>💡 تعريف برؤية 2030</h1>
+
     <div class="gold-line"></div>
-    <p>رحلة نحو مستقبل نصنعه بطموحنا.</p>
+
+    <p>
+      الرؤية ليست أرقامًا فقط... بل مستقبل نشارك جميعًا في صناعته.
+    </p>
+
   </div>
 
   <div class="activity-card">
 
-    <h2>رؤية وطن.. وطموح يصل إلى المستقبل 🇸🇦</h2>
+    <h2>
+      رؤية وطن.. وطموح يصل إلى المستقبل 🇸🇦
+    </h2>
 
     <p>
       رؤية السعودية 2030 هي خارطة طريق طموحة لمستقبل المملكة،
-      تستثمر في الإنسان والفرص والإمكانات لبناء مستقبل أكثر ازدهارًا.
+      تقوم على استثمار نقاط القوة والفرص والإمكانات لبناء وطن أكثر ازدهارًا.
     </p>
 
     <div class="vision-intro">
-      👆 اضغطي على المحاور الثلاثة واكتشفي معنى كل محور.
+      اضغطي على كل محور واكتشفي معناه، ثم شاهدي كيف يمكن أن يكون لكِ دور فيه.
     </div>
 
     <div class="vision-grid">
 
-      <div class="vision-card" onclick="openVision(this)">
+      <div
+        class="vision-card"
+        onclick="openVision(
+          this,
+          'مجتمع حيوي',
+          'مجتمع يعتز بقيمه وهويته، ويتمتع أفراده بجودة حياة أفضل، مع الاهتمام بالصحة والثقافة والترفيه والبيئة.',
+          'أنتِ جزء من هذا المحور عندما تحافظين على صحتك وبيئتك ومدرستك وتشاركين بإيجابية في مجتمعك.'
+        )">
+
         <div class="vision-icon">🌱</div>
+
         <strong>مجتمع حيوي</strong>
-        <span>حياة عامرة، صحة أفضل، ثقافة راسخة وجودة حياة متميزة.</span>
-        <div class="tap-note">اضغطي للاستكشاف</div>
+
+        <span>
+          الإنسان أولًا.. وجودة حياة تنمو معه.
+        </span>
+
+        <div class="tap-note">
+          اضغطي للاستكشاف ←
+        </div>
+
       </div>
 
-      <div class="vision-card" onclick="openVision(this)">
+      <div
+        class="vision-card"
+        onclick="openVision(
+          this,
+          'اقتصاد مزدهر',
+          'اقتصاد متنوع يصنع الفرص، ويستثمر في التعليم والابتكار وريادة الأعمال والمهارات التي يحتاجها المستقبل.',
+          'تعلمك اليوم، وتطوير مهاراتك، وأفكارك الجديدة يمكن أن تكون جزءًا من اقتصاد وطنك في المستقبل.'
+        )">
+
         <div class="vision-icon">📈</div>
+
         <strong>اقتصاد مزدهر</strong>
-        <span>فرص واعدة، تعليم يدعم المستقبل، واستثمار في قدرات الوطن.</span>
-        <div class="tap-note">اضغطي للاستكشاف</div>
+
+        <span>
+          فرص، معرفة، ابتكار ومستقبل واعد.
+        </span>
+
+        <div class="tap-note">
+          اضغطي للاستكشاف ←
+        </div>
+
       </div>
 
-      <div class="vision-card" onclick="openVision(this)">
+      <div
+        class="vision-card"
+        onclick="openVision(
+          this,
+          'وطن طموح',
+          'وطن يعمل بكفاءة ومسؤولية، ويشجع أبناءه وبناته على المشاركة والإنجاز وتحمل المسؤولية.',
+          'المواطنة المسؤولة تبدأ منكِ: التزام، مبادرة، محافظة على الممتلكات، واحترام للأنظمة.'
+        )">
+
         <div class="vision-icon">🇸🇦</div>
+
         <strong>وطن طموح</strong>
-        <span>مسؤولية وشفافية وفاعلية وطموح لا يتوقف عند حدود.</span>
-        <div class="tap-note">اضغطي للاستكشاف</div>
+
+        <span>
+          مسؤولية وإنجاز وطموح لا يتوقف.
+        </span>
+
+        <div class="tap-note">
+          اضغطي للاستكشاف ←
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- صندوق الاستكشاف الفعلي -->
+
+    <div id="visionDiscovery" class="vision-discovery">
+
+      <div class="discovery-number">
+        2030
+      </div>
+
+      <div>
+
+        <small>
+          اكتشفي محاور الرؤية
+        </small>
+
+        <h3 id="visionTitle">
+          اختاري أحد المحاور الثلاثة
+        </h3>
+
+        <p id="visionText">
+          اضغطي على إحدى البطاقات بالأعلى لتبدأ رحلة الاستكشاف.
+        </p>
+
+        <div id="visionYou" class="vision-you"></div>
+
       </div>
 
     </div>
 
     <div class="question">
 
-      <h3>🎯 تحدي المحطة: أي مما يلي أحد محاور رؤية السعودية 2030؟</h3>
+      <h3>
+        🎯 تحدي المحطة: أي مما يلي أحد محاور رؤية السعودية 2030؟
+      </h3>
 
       <div class="answers">
-        <button class="answer" onclick="answerOne(this,true)">اقتصاد مزدهر</button>
-        <button class="answer" onclick="answerOne(this,false)">اقتصاد بلا تنوع</button>
-        <button class="answer" onclick="answerOne(this,false)">مجتمع بلا مشاركة</button>
+
+        <button
+          class="answer"
+          onclick="answerOne(this,true)">
+          اقتصاد مزدهر
+        </button>
+
+        <button
+          class="answer"
+          onclick="answerOne(this,false)">
+          اقتصاد بلا تنوع
+        </button>
+
+        <button
+          class="answer"
+          onclick="answerOne(this,false)">
+          مجتمع بلا مشاركة
+        </button>
+
       </div>
 
       <div id="feedback1" class="feedback"></div>
@@ -1107,43 +1658,68 @@ button,input{font-size:inherit}
     </div>
 
     <div class="actions">
-      <button id="complete1" class="primary" style="display:none" onclick="completeStation(1)">
+
+      <button
+        id="complete1"
+        class="primary"
+        style="display:none"
+        onclick="completeStation(1)">
         أنهيت المحطة الأولى • تابعي الرحلة ←
       </button>
+
     </div>
 
   </div>
 
 </div>
+
 </section>
 
-<!-- ======================================================
-     المحطة 02
-====================================================== -->
+<!-- =========================================================
+     المحطة الثانية
+========================================================= -->
 
 <section id="station2" class="page green-page station-page">
 
 <div class="shell">
 
   <div class="topbar">
-    <div class="school">المحطة 02 • مسؤوليتي</div>
-    <button class="back" onclick="showPage('journey')">العودة للمسار ↩</button>
+
+    <div class="school">
+      المحطة 02 • مسؤوليتي تجاه وطني
+    </div>
+
+    <button class="back" onclick="showPage('journey')">
+      العودة للمسار ↩
+    </button>
+
   </div>
 
   <div class="header">
-    <div class="eyebrow">المحطة الثانية</div>
+
+    <div class="eyebrow">
+      المحطة الثانية
+    </div>
+
     <h1>🌱 أكون مواطنة مسؤولة</h1>
+
     <div class="gold-line"></div>
-    <p>الوطن يبدأ من قرارات صغيرة نصنعها كل يوم.</p>
+
+    <p>
+      المسؤولية ليست كلمة... بل اختيار نصنعه كل يوم.
+    </p>
+
   </div>
 
   <div class="activity-card">
 
-    <h2>لو كنتِ في هذا الموقف.. ماذا ستفعلين؟ 🤔</h2>
+    <h2>
+      مهمات المواطنة 🇸🇦
+    </h2>
 
     <p>
-      اختاري التصرف الذي ترينه صحيحًا.
-      لن تعرفي النتيجة إلا بعد اختيارك.
+      أمامك عدة مواقف. فكري جيدًا واختاري التصرف الذي يعكس المسؤولية والانتماء.
+      لن تظهر لكِ الإجابة قبل اختيارك.
     </p>
 
     <div class="scenarios">
@@ -1152,15 +1728,21 @@ button,input{font-size:inherit}
 
         <span class="scenario-number">١</span>
 
-        <h3>لاحظتِ مخلفات في ساحة المدرسة بعد انتهاء الفسحة، ماذا تفعلين؟</h3>
+        <h3>
+          انتهت الفسحة ولاحظتِ بعض المخلفات في ساحة المدرسة. ماذا تفعلين؟
+        </h3>
 
         <div class="choice-row">
 
-          <button class="choice" onclick="scenarioAnswer(this,true,1)">
+          <button
+            class="choice"
+            onclick="scenarioAnswer(this,true,1)">
             أساهم في المحافظة على المكان وأضعها في المكان المخصص
           </button>
 
-          <button class="choice" onclick="scenarioAnswer(this,false,1)">
+          <button
+            class="choice"
+            onclick="scenarioAnswer(this,false,1)">
             أتجاهلها لأنها ليست من مسؤوليتي
           </button>
 
@@ -1172,15 +1754,21 @@ button,input{font-size:inherit}
 
         <span class="scenario-number">٢</span>
 
-        <h3>رأيتِ طالبة تعبث بأحد ممتلكات المدرسة، كيف تتصرفين؟</h3>
+        <h3>
+          رأيتِ طالبة تعبث بأحد ممتلكات المدرسة. كيف تتصرفين؟
+        </h3>
 
         <div class="choice-row">
 
-          <button class="choice" onclick="scenarioAnswer(this,false,2)">
+          <button
+            class="choice"
+            onclick="scenarioAnswer(this,false,2)">
             أتجاهل الموقف وأغادر
           </button>
 
-          <button class="choice" onclick="scenarioAnswer(this,true,2)">
+          <button
+            class="choice"
+            onclick="scenarioAnswer(this,true,2)">
             أنصحها بالمحافظة على الممتلكات وأبلغ المسؤولة عند الحاجة
           </button>
 
@@ -1192,16 +1780,48 @@ button,input{font-size:inherit}
 
         <span class="scenario-number">٣</span>
 
-        <h3>كيف يمكن أن يكون لكِ دور في مستقبل وطنك؟</h3>
+        <h3>
+          وصلك رابط غير موثوق يطلب منكِ معلومات شخصية باسم جهة معروفة.
+        </h3>
 
         <div class="choice-row">
 
-          <button class="choice" onclick="scenarioAnswer(this,true,3)">
-            أتعلم وأتقن عملي وأشارك بإيجابية وأحافظ على وطني
+          <button
+            class="choice"
+            onclick="scenarioAnswer(this,true,3)">
+            أتحقق من المصدر ولا أشارك معلوماتي وأبلغ عند الاشتباه
           </button>
 
-          <button class="choice" onclick="scenarioAnswer(this,false,3)">
-            أترك المسؤولية للآخرين فقط
+          <button
+            class="choice"
+            onclick="scenarioAnswer(this,false,3)">
+            أفتح الرابط مباشرة وأرسل بياناتي
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="scenario">
+
+        <span class="scenario-number">٤</span>
+
+        <h3>
+          أتيحت لكِ فرصة للمشاركة في مبادرة تطوعية لخدمة مجتمعك.
+        </h3>
+
+        <div class="choice-row">
+
+          <button
+            class="choice"
+            onclick="scenarioAnswer(this,false,4)">
+            أرفض لأن خدمة المجتمع مسؤولية الآخرين فقط
+          </button>
+
+          <button
+            class="choice"
+            onclick="scenarioAnswer(this,true,4)">
+            أشارك بما يناسب وقتي وقدرتي وأساهم بإيجابية
           </button>
 
         </div>
@@ -1213,47 +1833,73 @@ button,input{font-size:inherit}
     <div id="feedback2" class="feedback"></div>
 
     <div class="actions">
-      <button id="complete2" class="primary" style="display:none" onclick="completeStation(2)">
-        أكملت مواقف المواطنة • إلى المحطة التالية ←
+
+      <button
+        id="complete2"
+        class="primary"
+        style="display:none"
+        onclick="completeStation(2)">
+        أكملت مهمات المواطنة • إلى المحطة التالية ←
       </button>
+
     </div>
 
   </div>
 
 </div>
+
 </section>
 
-<!-- ======================================================
-     المحطة 03 - الخريطة
-====================================================== -->
+<!-- =========================================================
+     المحطة الثالثة — الخريطة
+========================================================= -->
 
 <section id="station3" class="page green-page station-page">
 
 <div class="shell">
 
   <div class="topbar">
-    <div class="school">المحطة 03 • اكتشفي وطنك</div>
-    <button class="back" onclick="showPage('journey')">العودة للمسار ↩</button>
+
+    <div class="school">
+      المحطة 03 • اكتشفي وطنك
+    </div>
+
+    <button class="back" onclick="showPage('journey')">
+      العودة للمسار ↩
+    </button>
+
   </div>
 
   <div class="header">
-    <div class="eyebrow">المحطة الثالثة</div>
+
+    <div class="eyebrow">
+      المحطة الثالثة
+    </div>
+
     <h1>🗺️ رحلة افتراضية في بلادي</h1>
+
     <div class="gold-line"></div>
-    <p>من شمال المملكة إلى جنوبها.. وطن واسع، متنوع، ومليء بالحكايات.</p>
+
+    <p>
+      من الشمال إلى الجنوب، ومن البحر الأحمر إلى الخليج العربي...
+      لكل مدينة حكاية.
+    </p>
+
   </div>
 
   <div class="activity-card">
 
-    <h2>خريطة رحلتنا في المملكة 🇸🇦</h2>
+    <h2>
+      اكتشفي مدن المملكة 🇸🇦
+    </h2>
 
     <p>
-      تعرفي على مدن المملكة على الخريطة.
-      بعض الوجهات تحمل نقاطًا ذهبية تفاعلية؛ اضغطي عليها لاكتشافها.
+      أسماء المدن موزعة على الخريطة.
+      اضغطي على أي مدينة لتكتشفي منطقتها وما تشتهر به ولمحة من ثقافتها وتراثها.
     </p>
 
     <div class="map-intro">
-      ✦ أسماء المدن ظاهرة على الخريطة • الوجهات ذات الإطار الذهبي قابلة للاستكشاف ✦
+      ✦ كل أسماء المدن الموجودة على الخريطة تفاعلية وقابلة للضغط ✦
     </div>
 
     <div class="map-layout">
@@ -1262,72 +1908,344 @@ button,input{font-size:inherit}
 
         <div class="map-shape"></div>
 
-        <!-- مدن تفاعلية -->
+        <!-- الشمال -->
 
-        <div class="city interactive riyadh"
-          onclick="visitCity(this,1,'الرياض','عاصمة المملكة وقلبها الإداري والاقتصادي، تجمع بين التاريخ والمشروعات الحديثة والطموح نحو المستقبل.')">
-          الرياض
+        <div
+          class="city arar"
+          onclick="visitCity(
+            this,
+            'عرعر',
+            'منطقة الحدود الشمالية',
+            'تشتهر بطبيعتها الصحراوية ومراعيها الواسعة.',
+            'تتميز المنطقة بثقافة الضيافة والكرم والموروث الشعبي المرتبط ببيئة شمال المملكة.'
+          )">
+          عرعر
         </div>
 
-        <div class="city interactive makkah"
-          onclick="visitCity(this,2,'مكة المكرمة','أطهر البقاع وقبلة المسلمين، تستقبل ضيوف الرحمن من أنحاء العالم.')">
-          مكة المكرمة
+        <div
+          class="city sakaka"
+          onclick="visitCity(
+            this,
+            'سكاكا',
+            'منطقة الجوف',
+            'مدينة رئيسية في الجوف، وتشتهر المنطقة بالزيتون والمواقع التاريخية.',
+            'للجوف موروث تاريخي وزراعي عريق، وتبرز فيها الحرف والضيافة السعودية الأصيلة.'
+          )">
+          سكاكا
         </div>
 
-        <div class="city interactive madinah"
-          onclick="visitCity(this,3,'المدينة المنورة','مدينة رسول الله ﷺ، ومن أهم المدن الدينية والتاريخية في المملكة.')">
-          المدينة المنورة
+        <div
+          class="city tabuk"
+          onclick="visitCity(
+            this,
+            'تبوك',
+            'منطقة تبوك',
+            'بوابة شمال غرب المملكة، وتتميز بتنوع طبيعي بين الجبال والساحل والصحراء.',
+            'تجمع ثقافة تبوك بين تراث الشمال والضيافة والموروث الشعبي المتنوع.'
+          )">
+          تبوك
         </div>
 
-        <div class="city interactive alula"
-          onclick="visitCity(this,4,'العُلا','وجهة تاريخية وطبيعية عالمية تتميز بتراثها وآثارها وتكويناتها الصخرية المذهلة.')">
+        <div
+          class="city alula"
+          onclick="visitCity(
+            this,
+            'العُلا',
+            'منطقة المدينة المنورة',
+            'وجهة تاريخية وطبيعية بارزة تشتهر بتكويناتها الصخرية ومواقعها الأثرية.',
+            'تحمل العُلا إرثًا حضاريًا عريقًا يعكس تعاقب الحضارات في شمال غرب الجزيرة العربية.'
+          )">
           العُلا
         </div>
 
-        <div class="city interactive abha"
-          onclick="visitCity(this,5,'أبها','مدينة جبلية جميلة في جنوب المملكة، تشتهر بطبيعتها وأجوائها المميزة.')">
-          أبها
+        <!-- المدينة وينبع -->
+
+        <div
+          class="city madinah"
+          onclick="visitCity(
+            this,
+            'المدينة المنورة',
+            'منطقة المدينة المنورة',
+            'مدينة رسول الله ﷺ وإحدى أهم المدن الدينية في العالم الإسلامي.',
+            'تشتهر بروحها التاريخية والضيافة، وترتبط بها معالم وقصص من السيرة النبوية.'
+          )">
+          المدينة المنورة
         </div>
 
-        <div class="city interactive dammam"
-          onclick="visitCity(this,6,'الدمام','إحدى أهم مدن المنطقة الشرقية ومركز اقتصادي بارز على ساحل الخليج العربي.')">
+        <div
+          class="city yanbu"
+          onclick="visitCity(
+            this,
+            'ينبع',
+            'منطقة المدينة المنورة',
+            'مدينة ساحلية على البحر الأحمر وتجمع بين النشاط الصناعي والواجهات البحرية.',
+            'تتميز بتراث بحري ارتبط قديمًا بالصيد والتجارة عبر البحر الأحمر.'
+          )">
+          ينبع
+        </div>
+
+        <!-- الوسط والشمال الأوسط -->
+
+        <div
+          class="city hail"
+          onclick="visitCity(
+            this,
+            'حائل',
+            'منطقة حائل',
+            'تشتهر بجبال أجا وسلمى وطبيعتها الصحراوية وتاريخها العريق.',
+            'ترتبط حائل بالكرم والضيافة والشعر والموروث النجدي والشمالي.'
+          )">
+          حائل
+        </div>
+
+        <div
+          class="city buraidah"
+          onclick="visitCity(
+            this,
+            'بريدة',
+            'منطقة القصيم',
+            'إحدى أبرز مدن القصيم وتشتهر المنطقة بالزراعة والتمور.',
+            'تتميز بثقافة نجدية أصيلة وأسواق شعبية وموروث زراعي معروف.'
+          )">
+          بريدة
+        </div>
+
+        <div
+          class="city hafar"
+          onclick="visitCity(
+            this,
+            'حفر الباطن',
+            'المنطقة الشرقية',
+            'مدينة مهمة في شمال شرق المملكة وموقعها يربط عددًا من الطرق والمناطق.',
+            'تتميز بموروث صحراوي وثقافة ضيافة مرتبطة ببيئة شمال شرق المملكة.'
+          )">
+          حفر الباطن
+        </div>
+
+        <!-- الرياض -->
+
+        <div
+          class="city riyadh"
+          onclick="visitCity(
+            this,
+            'الرياض',
+            'منطقة الرياض',
+            'عاصمة المملكة ومركز رئيسي للإدارة والأعمال والفعاليات والمشروعات الحديثة.',
+            'تجمع الرياض بين العمق النجدي والعمارة التراثية والحياة العصرية المتسارعة.'
+          )">
+          الرياض
+        </div>
+
+        <div
+          class="city diriyah"
+          onclick="visitCity(
+            this,
+            'الدرعية',
+            'منطقة الرياض',
+            'مهد الدولة السعودية الأولى ووجهة تاريخية وثقافية مهمة.',
+            'تشتهر بالعمارة النجدية والطين وتراث وادي حنيفة والهوية السعودية التاريخية.'
+          )">
+          الدرعية
+        </div>
+
+        <!-- الشرقية -->
+
+        <div
+          class="city jubail"
+          onclick="visitCity(
+            this,
+            'الجبيل',
+            'المنطقة الشرقية',
+            'مدينة ساحلية وصناعية بارزة على الخليج العربي.',
+            'ترتبط المنطقة تاريخيًا بالبحر والصيد والغوص، إلى جانب تطورها الصناعي الحديث.'
+          )">
+          الجبيل
+        </div>
+
+        <div
+          class="city dammam"
+          onclick="visitCity(
+            this,
+            'الدمام',
+            'المنطقة الشرقية',
+            'مدينة ساحلية ومركز رئيسي في المنطقة الشرقية على الخليج العربي.',
+            'تجمع ثقافتها بين التراث البحري والحياة الحضرية الحديثة في شرق المملكة.'
+          )">
           الدمام
         </div>
 
-        <!-- بقية أسماء المدن -->
+        <div
+          class="city khobar"
+          onclick="visitCity(
+            this,
+            'الخبر',
+            'المنطقة الشرقية',
+            'مدينة ساحلية تشتهر بواجهتها البحرية ونشاطها الحضري.',
+            'يظهر فيها الموروث البحري للمنطقة الشرقية إلى جانب طابعها العصري.'
+          )">
+          الخبر
+        </div>
 
-        <div class="city jeddah">جدة</div>
-        <div class="city taif">الطائف</div>
-        <div class="city tabuk">تبوك</div>
-        <div class="city hail">حائل</div>
-        <div class="city buraidah">بريدة</div>
-        <div class="city khobar">الخبر</div>
-        <div class="city jubail">الجبيل</div>
-        <div class="city ahsa">الأحساء</div>
-        <div class="city khamis">خميس مشيط</div>
-        <div class="city jazan">جازان</div>
-        <div class="city najran">نجران</div>
-        <div class="city baha">الباحة</div>
-        <div class="city sakaka">سكاكا</div>
-        <div class="city arar">عرعر</div>
-        <div class="city yanbu">ينبع</div>
-        <div class="city diriyah">الدرعية</div>
-        <div class="city hafar">حفر الباطن</div>
+        <div
+          class="city ahsa"
+          onclick="visitCity(
+            this,
+            'الأحساء',
+            'المنطقة الشرقية',
+            'واحة كبيرة تشتهر بالنخيل والعيون والتراث العمراني.',
+            'تتميز بثقافة الواحات والحرف التقليدية والأطعمة الشعبية والموروث الأحسائي.'
+          )">
+          الأحساء
+        </div>
+
+        <!-- مكة وجدة والطائف -->
+
+        <div
+          class="city jeddah"
+          onclick="visitCity(
+            this,
+            'جدة',
+            'منطقة مكة المكرمة',
+            'مدينة ساحلية على البحر الأحمر وبوابة تاريخية للحرمين الشريفين.',
+            'تتميز جدة التاريخية بالرواشين والبيوت القديمة، وبثقافة بحرية متنوعة.'
+          )">
+          جدة
+        </div>
+
+        <div
+          class="city makkah"
+          onclick="visitCity(
+            this,
+            'مكة المكرمة',
+            'منطقة مكة المكرمة',
+            'قبلة المسلمين وأقدس مدن الإسلام، ويقصدها المسلمون للحج والعمرة.',
+            'تتميز بتاريخ عريق مرتبط بخدمة ضيوف الرحمن وتنوع ثقافي صنعته وفود المسلمين عبر القرون.'
+          )">
+          مكة المكرمة
+        </div>
+
+        <div
+          class="city taif"
+          onclick="visitCity(
+            this,
+            'الطائف',
+            'منطقة مكة المكرمة',
+            'مدينة جبلية تشتهر بأجوائها المعتدلة والورد الطائفي والفواكه.',
+            'من أشهر ملامحها الثقافية الورد الطائفي والأسواق والموروث الزراعي والحجازي.'
+          )">
+          الطائف
+        </div>
+
+        <!-- الجنوب -->
+
+        <div
+          class="city baha"
+          onclick="visitCity(
+            this,
+            'الباحة',
+            'منطقة الباحة',
+            'منطقة جبلية تتميز بالغابات والقرى التراثية والطبيعة الخضراء.',
+            'تشتهر بعمارتها الحجرية وموروثها الشعبي وقرى تاريخية تعكس ثقافة جنوب غرب المملكة.'
+          )">
+          الباحة
+        </div>
+
+        <div
+          class="city abha"
+          onclick="visitCity(
+            this,
+            'أبها',
+            'منطقة عسير',
+            'مدينة جبلية تتميز بأجوائها وطبيعتها ومرتفعاتها.',
+            'تشتهر عسير بالقط العسيري والعمارة التقليدية والألوان والفنون الشعبية.'
+          )">
+          أبها
+        </div>
+
+        <div
+          class="city khamis"
+          onclick="visitCity(
+            this,
+            'خميس مشيط',
+            'منطقة عسير',
+            'من أكبر مدن منطقة عسير ومركز تجاري وحضري مهم في الجنوب.',
+            'تحمل ثقافة عسيرية غنية بالفنون الشعبية والملابس التقليدية والعمارة المحلية.'
+          )">
+          خميس مشيط
+        </div>
+
+        <div
+          class="city jazan"
+          onclick="visitCity(
+            this,
+            'جازان',
+            'منطقة جازان',
+            'منطقة ساحلية جنوبية تتميز بالجزر والجبال والزراعة والتنوع الطبيعي.',
+            'تتميز بثقافة جنوبية غنية بالرقصات والأزياء والأكلات الشعبية والموروث البحري والزراعي.'
+          )">
+          جازان
+        </div>
+
+        <div
+          class="city najran"
+          onclick="visitCity(
+            this,
+            'نجران',
+            'منطقة نجران',
+            'مدينة جنوبية ذات تاريخ عريق وعمارة تراثية مميزة.',
+            'تشتهر بالبيوت الطينية والحرف التقليدية والضيافة والموروث الثقافي النجراني.'
+          )">
+          نجران
+        </div>
 
       </div>
 
+      <!-- بطاقة المعلومات -->
+
       <div class="map-panel">
 
-        <div class="pin">📍</div>
+        <div class="map-kicker">
+          ✦ جواز رحلة وطن ✦
+        </div>
 
-        <h3 id="cityTitle">ابدئي جولتك</h3>
+        <div class="pin">
+          📍
+        </div>
 
-        <p id="cityInfo">
-          اختاري إحدى الوجهات الذهبية على الخريطة لتكتشفي معلومة عنها.
-        </p>
+        <h3 id="cityTitle">
+          اختاري مدينة من الخريطة
+        </h3>
+
+        <div id="cityRegion" class="city-region">
+          المملكة العربية السعودية
+        </div>
+
+        <div class="culture-block">
+
+          <small>
+            تشتهر بـ
+          </small>
+
+          <p id="cityInfo">
+            اضغطي على أي اسم مدينة على الخريطة لتبدأ جولتك.
+          </p>
+
+        </div>
+
+        <div class="culture-block gold-block">
+
+          <small>
+            الثقافة والتراث
+          </small>
+
+          <p id="cityCulture">
+            لكل منطقة في المملكة قصة وهوية وموروث يستحق الاكتشاف.
+          </p>
+
+        </div>
 
         <div id="visitedCount" class="visited-count">
-          تم استكشاف ٠ من ٦ وجهات
+          ابدئي جولتك من أي مدينة ✦
         </div>
 
       </div>
@@ -1336,8 +2254,12 @@ button,input{font-size:inherit}
 
     <div class="actions">
 
-      <button id="complete3" class="primary" style="display:none" onclick="completeStation(3)">
-        أكملت جولتي في المملكة • تابعي ←
+      <button
+        id="complete3"
+        class="primary"
+        style="display:none"
+        onclick="completeStation(3)">
+        تابعي رحلة وطن ←
       </button>
 
     </div>
@@ -1345,96 +2267,167 @@ button,input{font-size:inherit}
   </div>
 
 </div>
+
 </section>
 
-<!-- ======================================================
-     المحطة 04
-====================================================== -->
+<!-- =========================================================
+     المحطة الرابعة
+========================================================= -->
 
 <section id="station4" class="page green-page station-page">
 
 <div class="shell">
 
   <div class="topbar">
-    <div class="school">المحطة 04 • نحو العالم</div>
-    <button class="back" onclick="showPage('journey')">العودة للمسار ↩</button>
+
+    <div class="school">
+      المحطة 04 • المملكة نحو العالم
+    </div>
+
+    <button class="back" onclick="showPage('journey')">
+      العودة للمسار ↩
+    </button>
+
   </div>
 
   <div class="header">
-    <div class="eyebrow">المحطة الرابعة والأخيرة</div>
+
+    <div class="eyebrow">
+      المحطة الرابعة والأخيرة
+    </div>
+
     <h1>🌍 المملكة وجهة العالم</h1>
+
     <div class="gold-line"></div>
-    <p>طموح سعودي.. وحضور يراه العالم.</p>
+
+    <p>
+      هوية راسخة، وطموح كبير، وحضور عالمي متنامٍ.
+    </p>
+
   </div>
 
   <div class="activity-card">
 
-    <h2>اكتشفي كيف أصبحت المملكة وجهة عالمية ✨</h2>
+    <h2>
+      من وطننا إلى العالم ✨
+    </h2>
 
     <p>
-      اضغطي على البطاقات واكتشفي مجالات تعكس حضور المملكة وطموحها.
+      اضغطي على كل نافذة واكتشفي جانبًا من جوانب حضور المملكة وطموحها.
     </p>
 
     <div class="world-grid">
 
       <div class="world-card" onclick="openWorld(this)">
+
         <div class="world-icon">✈️</div>
-        <strong>السياحة</strong>
-        <span>وجهات طبيعية وتاريخية وثقافية متنوعة تستقبل الزوار من مختلف أنحاء العالم.</span>
+
+        <strong>السياحة والوجهات</strong>
+
+        <span>
+          من البحر والجبال إلى الصحارى والمدن التاريخية،
+          تقدم المملكة تجارب سياحية وثقافية متنوعة.
+        </span>
+
       </div>
 
       <div class="world-card" onclick="openWorld(this)">
+
         <div class="world-icon">🏙️</div>
+
         <strong>إكسبو 2030 الرياض</strong>
-        <span>حدث عالمي يجمع الدول والأفكار والابتكار في مدينة الرياض.</span>
+
+        <span>
+          تستضيف الرياض معرض إكسبو الدولي 2030،
+          حيث تلتقي الدول والأفكار والابتكارات.
+        </span>
+
       </div>
 
       <div class="world-card" onclick="openWorld(this)">
+
         <div class="world-icon">⚽</div>
+
         <strong>كأس العالم 2034</strong>
-        <span>استضافة عالمية تعكس تطور المملكة وطموحها في القطاع الرياضي.</span>
+
+        <span>
+          تستضيف المملكة كأس العالم لكرة القدم 2034،
+          في حدث رياضي عالمي كبير.
+        </span>
+
       </div>
 
       <div class="world-card" onclick="openWorld(this)">
+
         <div class="world-icon">🏛️</div>
+
         <strong>الثقافة والتراث</strong>
-        <span>تراث سعودي عريق يُعرّف العالم بتاريخ المملكة وهويتها وثقافتها.</span>
+
+        <span>
+          العمارة والفنون والأزياء والأطعمة والمواقع التاريخية
+          تحكي للعالم قصة المملكة وهويتها.
+        </span>
+
       </div>
 
       <div class="world-card" onclick="openWorld(this)">
+
         <div class="world-icon">🚀</div>
+
         <strong>الابتكار والمستقبل</strong>
-        <span>استثمار في التقنية والإنسان والمشروعات التي ترسم ملامح المستقبل.</span>
+
+        <span>
+          التقنية والتعليم والمشروعات المستقبلية
+          تعكس طموح المملكة في صناعة فرص جديدة.
+        </span>
+
       </div>
 
       <div class="world-card" onclick="openWorld(this)">
+
         <div class="world-icon">🌱</div>
+
         <strong>الاستدامة</strong>
-        <span>مبادرات ومشروعات تدعم مستقبلًا أكثر استدامة للأجيال القادمة.</span>
+
+        <span>
+          مستقبل المملكة يجمع بين التنمية والابتكار
+          والاهتمام بالبيئة والأجيال القادمة.
+        </span>
+
       </div>
 
     </div>
 
     <div id="worldCounter" class="world-counter">
-      استكشفتِ ٠ من ٦ مجالات
+      استكشفتِ ٠ من ٦ نوافذ
     </div>
 
     <div class="question">
 
-      <h3>🏆 التحدي الأخير: ما الذي يعكس مكانة المملكة عالميًا؟</h3>
+      <h3>
+        🏆 التحدي الأخير: أي عبارة تعبّر بشكل أفضل عن كون المملكة وجهة للعالم؟
+      </h3>
 
       <div class="answers">
-        <button class="answer" onclick="answerFour(this,true)">
-          التطوير والابتكار واستضافة الأحداث العالمية وإبراز الثقافة السعودية
+
+        <button
+          class="answer"
+          onclick="answerFour(this,true)">
+          تحافظ على هويتها وتطوّر قطاعاتها وتستضيف العالم وتستثمر في المستقبل
         </button>
 
-        <button class="answer" onclick="answerFour(this,false)">
-          التوقف عن تطوير القطاعات الجديدة
+        <button
+          class="answer"
+          onclick="answerFour(this,false)">
+          تتوقف عن تطوير القطاعات والفرص الجديدة
         </button>
 
-        <button class="answer" onclick="answerFour(this,false)">
-          الابتعاد عن الاستثمار في المستقبل
+        <button
+          class="answer"
+          onclick="answerFour(this,false)">
+          تبتعد عن الثقافة والابتكار والأحداث العالمية
         </button>
+
       </div>
 
       <div id="feedback4" class="feedback"></div>
@@ -1443,7 +2436,11 @@ button,input{font-size:inherit}
 
     <div class="actions">
 
-      <button id="complete4" class="primary" style="display:none" onclick="completeStation(4)">
+      <button
+        id="complete4"
+        class="primary"
+        style="display:none"
+        onclick="completeStation(4)">
         🏅 أتممت رحلة وطن
       </button>
 
@@ -1452,33 +2449,51 @@ button,input{font-size:inherit}
   </div>
 
 </div>
+
 </section>
 
-<!-- ======================================================
+<!-- =========================================================
      النهاية
-====================================================== -->
+========================================================= -->
 
 <section id="finish" class="page green-page">
 
   <div class="finish-card">
 
-    <div class="medal">🏅</div>
+    <div class="medal">
+      🏅
+    </div>
 
-    <h1>أتممتِ رحلة وطن!</h1>
+    <h1>
+      أتممتِ رحلة وطن!
+    </h1>
 
-    <h2>🇸🇦 سفيرة الوعي الوطني 🇸🇦</h2>
+    <h2>
+      🇸🇦 سفيرة الوعي الوطني 🇸🇦
+    </h2>
 
     <div class="final-progress">
       <div></div>
     </div>
 
     <p>
-      <strong>١٠٠٪ — اكتملت الرحلة</strong>
+
+      <strong>
+        ١٠٠٪ — اكتملت الرحلة
+      </strong>
+
       <br><br>
-      أحسنتِ! انتقلتِ بين محطات الرؤية والمواطنة،
-      وتجولتِ في وطنك، واكتشفتِ مكانة المملكة وطموحها نحو العالم.
-      <br>
-      وطننا مسؤوليتنا.. ومستقبله نصنعه معًا.
+
+      أحسنتِ!
+      تعرفتِ على رؤية المملكة، واختبرتِ معنى المواطنة المسؤولة،
+      وتجولتِ بين مدن وطنك وثقافاته، ثم اكتشفتِ حضور المملكة في العالم.
+
+      <br><br>
+
+      <strong>
+        وطننا مسؤوليتنا... ومستقبله نصنعه معًا.
+      </strong>
+
     </p>
 
     <input
@@ -1488,19 +2503,33 @@ button,input{font-size:inherit}
       placeholder="اكتبي اسمك هنا ✨">
 
     <p>
-      <strong>الإبتدائية الخامسة والأربعون</strong>
+
+      <strong>
+        الإبتدائية الخامسة والأربعون
+      </strong>
+
       <br>
+
       المعلمة: دار الهناء الحربي
+
       &nbsp; • &nbsp;
+
       الصف: ٢/١
+
       <br>
+
       مديرة المدرسة: هبة فلمبان
+
     </p>
 
     <div class="actions">
-      <button class="primary" onclick="restartJourney()">
+
+      <button
+        class="primary"
+        onclick="restartJourney()">
         ↻ ابدئي رحلة وطن من جديد
       </button>
+
     </div>
 
   </div>
@@ -1509,16 +2538,17 @@ button,input{font-size:inherit}
 
 <script>
 
-/* ======================================================
+/* =========================================================
    الحالة
-====================================================== */
+========================================================= */
 
 let completed = 0;
 
 let scenarioDone = {
   1:false,
   2:false,
-  3:false
+  3:false,
+  4:false
 };
 
 let visitedCities = new Set();
@@ -1529,9 +2559,10 @@ let visionOpened = new Set();
 
 let finalQuestionCorrect = false;
 
-/* ======================================================
+
+/* =========================================================
    التنقل
-====================================================== */
+========================================================= */
 
 function showPage(id){
 
@@ -1545,12 +2576,17 @@ function showPage(id){
     target.classList.add("active");
   }
 
-  window.scrollTo(0,0);
+  window.scrollTo({
+    top:0,
+    left:0,
+    behavior:"instant"
+  });
 
   if(id === "journey"){
     updateJourney();
   }
 }
+
 
 function openStation(number){
 
@@ -1561,17 +2597,34 @@ function openStation(number){
   showPage("station" + number);
 }
 
-/* ======================================================
-   محطة 01
-====================================================== */
 
-function openVision(card){
+/* =========================================================
+   المحطة الأولى
+========================================================= */
+
+function openVision(card,title,text,you){
+
+  document.querySelectorAll(".vision-card").forEach(function(c){
+    c.classList.remove("opened");
+  });
 
   card.classList.add("opened");
 
-  visionOpened.add(card);
+  visionOpened.add(title);
+
+  document.getElementById("visionTitle").innerText = title;
+
+  document.getElementById("visionText").innerText = text;
+
+  const box = document.getElementById("visionYou");
+
+  box.style.display = "block";
+
+  box.innerHTML =
+    "<strong>دوركِ في الرؤية:</strong> " + you;
 
 }
+
 
 function answerOne(button,correct){
 
@@ -1579,37 +2632,43 @@ function answerOne(button,correct){
     b.classList.remove("correct","wrong");
   });
 
-  const feedback = document.getElementById("feedback1");
+  const feedback =
+    document.getElementById("feedback1");
 
   if(correct){
 
     button.classList.add("correct");
 
     feedback.innerHTML =
-      "رائع! اقتصاد مزدهر هو أحد المحاور الثلاثة لرؤية السعودية 2030 🌟";
+      "رائع! «اقتصاد مزدهر» أحد المحاور الثلاثة لرؤية السعودية 2030 🌟";
 
     feedback.style.color="#28764a";
 
-    document.getElementById("complete1").style.display="inline-block";
+    document.getElementById("complete1").style.display =
+      "inline-block";
 
   }else{
 
     button.classList.add("wrong");
 
     feedback.innerHTML =
-      "ليست الإجابة الصحيحة. فكري في محاور الرؤية الثلاثة وحاولي مرة أخرى.";
+      "ليست الإجابة الصحيحة. فكري في المحاور الثلاثة التي استكشفتِها وحاولي مرة أخرى.";
 
     feedback.style.color="#a34d3f";
+
   }
+
 }
 
-/* ======================================================
-   محطة 02
-====================================================== */
+
+/* =========================================================
+   المحطة الثانية
+========================================================= */
 
 function scenarioAnswer(button,correct,num){
 
-  const parent = button.parentElement;
+  const parent =
+    button.parentElement;
 
   parent.querySelectorAll(".choice").forEach(function(b){
     b.classList.remove("good","bad");
@@ -1618,11 +2677,13 @@ function scenarioAnswer(button,correct,num){
   if(correct){
 
     button.classList.add("good");
-    scenarioDone[num]=true;
+
+    scenarioDone[num] = true;
 
   }else{
 
     button.classList.add("bad");
+
   }
 
   const total =
@@ -1631,74 +2692,85 @@ function scenarioAnswer(button,correct,num){
   const feedback =
     document.getElementById("feedback2");
 
-  if(total === 3){
+  if(total === 4){
 
     feedback.innerHTML =
-      "🌟 ممتاز! أكملتِ جميع المواقف باختيارات مسؤولة. المواطنة تبدأ من تصرفاتنا.";
+      "🌟 ممتاز! أكملتِ مهمات المواطنة. المسؤولية تبدأ من اختياراتنا اليومية.";
 
-    feedback.style.color="#28764a";
+    feedback.style.color =
+      "#28764a";
 
-    document.getElementById("complete2").style.display="inline-block";
+    document.getElementById("complete2").style.display =
+      "inline-block";
 
   }else if(correct){
 
     feedback.innerHTML =
-      "اختيار مسؤول 👏 بقي " + (3-total) + " من المواقف.";
+      "اختيار مسؤول 👏 بقي " + (4-total) + " من المواقف.";
 
-    feedback.style.color="#28764a";
+    feedback.style.color =
+      "#28764a";
 
   }else{
 
     feedback.innerHTML =
-      "هذا الاختيار لا يعكس المواطنة المسؤولة. فكري في التصرف الذي يحافظ على وطنك ومجتمعك.";
+      "فكري مرة أخرى: أي اختيار يحافظ على الوطن والمجتمع ويعكس المسؤولية؟";
 
-    feedback.style.color="#a34d3f";
+    feedback.style.color =
+      "#a34d3f";
+
   }
+
 }
 
-/* ======================================================
-   محطة 03 - المدن
-====================================================== */
 
-function visitCity(element,number,title,text){
+/* =========================================================
+   المحطة الثالثة — الخريطة
+========================================================= */
+
+function visitCity(element,title,region,famous,culture){
 
   element.classList.add("visited");
 
-  visitedCities.add(number);
+  visitedCities.add(title);
 
   document.getElementById("cityTitle").innerText =
     "📍 " + title;
 
+  document.getElementById("cityRegion").innerText =
+    region;
+
   document.getElementById("cityInfo").innerText =
-    text;
+    famous;
 
-  const n = visitedCities.size;
+  document.getElementById("cityCulture").innerText =
+    culture;
 
-  const nums = {
-    0:"٠",
-    1:"١",
-    2:"٢",
-    3:"٣",
-    4:"٤",
-    5:"٥",
-    6:"٦"
-  };
+  const n =
+    visitedCities.size;
 
   document.getElementById("visitedCount").innerText =
-    "تم استكشاف " + nums[n] + " من ٦ وجهات";
+    "اكتشفتِ " + n + " مدينة من وطنك 🇸🇦";
 
-  if(n === 6){
+  /*
+     كل المدن قابلة للاستكشاف.
+     بعد استكشاف خمس مدن يظهر زر الاستمرار،
+     لكن يمكن للطالبة مواصلة استكشاف بقية المدن.
+  */
 
-    document.getElementById("visitedCount").innerText =
-      "✨ اكتملت الجولة — استكشفتِ جميع الوجهات الست";
+  if(n >= 5){
 
-    document.getElementById("complete3").style.display="inline-block";
+    document.getElementById("complete3").style.display =
+      "inline-block";
+
   }
+
 }
 
-/* ======================================================
-   محطة 04
-====================================================== */
+
+/* =========================================================
+   المحطة الرابعة
+========================================================= */
 
 function openWorld(card){
 
@@ -1706,7 +2778,8 @@ function openWorld(card){
 
   openedWorld.add(card);
 
-  const n = openedWorld.size;
+  const n =
+    openedWorld.size;
 
   const nums = {
     0:"٠",
@@ -1719,10 +2792,12 @@ function openWorld(card){
   };
 
   document.getElementById("worldCounter").innerText =
-    "استكشفتِ " + nums[n] + " من ٦ مجالات";
+    "استكشفتِ " + nums[n] + " من ٦ نوافذ";
 
   checkFinalStation();
+
 }
+
 
 function answerFour(button,correct){
 
@@ -1737,66 +2812,84 @@ function answerFour(button,correct){
 
     button.classList.add("correct");
 
-    finalQuestionCorrect=true;
+    finalQuestionCorrect = true;
 
     feedback.innerHTML =
-      "إجابة رائعة 🌟 هذه العناصر تعكس طموح المملكة وحضورها المتنامي عالميًا.";
+      "رائع 🌟 المملكة تجمع بين هويتها الراسخة وطموحها نحو المستقبل وحضورها العالمي.";
 
-    feedback.style.color="#28764a";
+    feedback.style.color =
+      "#28764a";
 
   }else{
 
     button.classList.add("wrong");
 
-    finalQuestionCorrect=false;
+    finalQuestionCorrect = false;
 
     feedback.innerHTML =
-      "ليست الإجابة الصحيحة. فكري فيما يدعم حضور المملكة وطموحها عالميًا.";
+      "فكري مرة أخرى فيما يعكس التطور والطموح والحضور العالمي للمملكة.";
 
-    feedback.style.color="#a34d3f";
+    feedback.style.color =
+      "#a34d3f";
+
   }
 
   checkFinalStation();
+
 }
+
 
 function checkFinalStation(){
 
-  if(openedWorld.size === 6 && finalQuestionCorrect){
+  if(
+    openedWorld.size === 6 &&
+    finalQuestionCorrect
+  ){
 
-    document.getElementById("complete4").style.display="inline-block";
+    document.getElementById("complete4").style.display =
+      "inline-block";
 
     document.getElementById("worldCounter").innerText =
-      "✨ استكشفتِ جميع المجالات — بقي إنهاء رحلة وطن";
+      "✨ اكتشفتِ جميع النوافذ — بقي إنهاء رحلة وطن";
+
   }
+
 }
 
-/* ======================================================
+
+/* =========================================================
    إكمال المحطات
-====================================================== */
+========================================================= */
 
 function completeStation(number){
 
   if(number > completed){
-    completed=number;
+    completed = number;
   }
 
   updateJourney();
 
   if(number === 4){
+
     showPage("finish");
+
     return;
+
   }
 
   showPage("journey");
+
 }
 
-/* ======================================================
+
+/* =========================================================
    تحديث المسار
-====================================================== */
+========================================================= */
 
 function updateJourney(){
 
-  const percent = completed * 25;
+  const percent =
+    completed * 25;
 
   const percentageText = {
     0:"٠٪",
@@ -1823,105 +2916,168 @@ function updateJourney(){
     const lock =
       document.getElementById("lock"+i);
 
-    card.classList.remove("locked","done","current");
+    card.classList.remove(
+      "locked",
+      "done",
+      "current"
+    );
 
     if(i <= completed){
 
       card.classList.add("done");
-      status.innerText="✓ مكتملة";
+
+      status.innerText =
+        "مكتملة";
 
       if(lock){
-        lock.style.display="none";
+        lock.style.display =
+          "none";
       }
 
-    }else if(i === completed+1){
+    }else if(i === completed + 1){
 
       card.classList.add("current");
-      status.innerText="ابدئي هنا";
+
+      status.innerText =
+        "ابدئي هنا";
 
       if(lock){
-        lock.style.display="none";
+        lock.style.display =
+          "none";
       }
 
     }else{
 
       card.classList.add("locked");
-      status.innerText="مقفلة";
+
+      status.innerText =
+        "مقفلة";
 
       if(lock){
-        lock.style.display="block";
+        lock.style.display =
+          "block";
       }
+
     }
+
   }
+
 }
 
-/* ======================================================
+
+/* =========================================================
    إعادة الرحلة
-====================================================== */
+========================================================= */
 
 function restartJourney(){
 
-  completed=0;
+  completed = 0;
 
-  scenarioDone={
+  scenarioDone = {
     1:false,
     2:false,
-    3:false
+    3:false,
+    4:false
   };
 
   visitedCities.clear();
+
   openedWorld.clear();
+
   visionOpened.clear();
 
-  finalQuestionCorrect=false;
+  finalQuestionCorrect = false;
+
 
   document.querySelectorAll(".answer").forEach(function(el){
     el.classList.remove("correct","wrong");
   });
 
+
   document.querySelectorAll(".choice").forEach(function(el){
     el.classList.remove("good","bad");
   });
+
 
   document.querySelectorAll(".vision-card").forEach(function(el){
     el.classList.remove("opened");
   });
 
-  document.querySelectorAll(".city.interactive").forEach(function(el){
+
+  document.querySelectorAll(".city").forEach(function(el){
     el.classList.remove("visited");
   });
+
 
   document.querySelectorAll(".world-card").forEach(function(el){
     el.classList.remove("opened");
   });
 
-  document.getElementById("feedback1").innerHTML="";
-  document.getElementById("feedback2").innerHTML="";
-  document.getElementById("feedback4").innerHTML="";
 
-  document.getElementById("complete1").style.display="none";
-  document.getElementById("complete2").style.display="none";
-  document.getElementById("complete3").style.display="none";
-  document.getElementById("complete4").style.display="none";
+  document.getElementById("feedback1").innerHTML = "";
+
+  document.getElementById("feedback2").innerHTML = "";
+
+  document.getElementById("feedback4").innerHTML = "";
+
+
+  document.getElementById("complete1").style.display =
+    "none";
+
+  document.getElementById("complete2").style.display =
+    "none";
+
+  document.getElementById("complete3").style.display =
+    "none";
+
+  document.getElementById("complete4").style.display =
+    "none";
+
+
+  document.getElementById("visionTitle").innerText =
+    "اختاري أحد المحاور الثلاثة";
+
+  document.getElementById("visionText").innerText =
+    "اضغطي على إحدى البطاقات بالأعلى لتبدأ رحلة الاستكشاف.";
+
+  document.getElementById("visionYou").style.display =
+    "none";
+
 
   document.getElementById("cityTitle").innerText =
-    "ابدئي جولتك";
+    "اختاري مدينة من الخريطة";
+
+  document.getElementById("cityRegion").innerText =
+    "المملكة العربية السعودية";
 
   document.getElementById("cityInfo").innerText =
-    "اختاري إحدى الوجهات الذهبية على الخريطة لتكتشفي معلومة عنها.";
+    "اضغطي على أي اسم مدينة على الخريطة لتبدأ جولتك.";
+
+  document.getElementById("cityCulture").innerText =
+    "لكل منطقة في المملكة قصة وهوية وموروث يستحق الاكتشاف.";
 
   document.getElementById("visitedCount").innerText =
-    "تم استكشاف ٠ من ٦ وجهات";
+    "ابدئي جولتك من أي مدينة ✦";
+
 
   document.getElementById("worldCounter").innerText =
-    "استكشفتِ ٠ من ٦ مجالات";
+    "استكشفتِ ٠ من ٦ نوافذ";
 
-  document.getElementById("studentName").value="";
+
+  document.getElementById("studentName").value =
+    "";
+
 
   updateJourney();
 
   showPage("home");
+
 }
+
+
+/* =========================================================
+   تشغيل أولي
+========================================================= */
 
 updateJourney();
 
